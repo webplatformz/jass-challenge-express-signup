@@ -1,0 +1,6 @@
+{
+  "githubKey": "JASS_CHALLENGE_GITHUB_KEY",
+  "githubSecret": "JASS_CHALLENGE_GITHUB_SECRET",
+  "bitbucketKey": "JASS_CHALLENGE_BITBUCKET_KEY",
+  "bitbucketSecret": "JASS_CHALLENGE_BITBUCKET_SECRET"
+}

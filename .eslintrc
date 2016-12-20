@@ -1,0 +1,42 @@
+{
+  "parser": "babel-eslint",
+  "env": {
+    "node": true,
+    "browser": true,
+    "es6": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:node/recommended"
+  ],
+  "plugins": [
+    "node"
+  ],
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module",
+    "ecmaFeatures": {
+    }
+  },
+  "rules": {
+    "eqeqeq": 2,
+    "semi": [
+      2,
+      "always"
+    ],
+    "quotes": [
+      2,
+      "single"
+    ],
+    "curly": [
+      2,
+      "all"
+    ],
+    "no-use-before-define": 0,
+    "no-console": 0
+  },
+  "globals": {
+    "it": false,
+    "beforeEach": false
+  }
+}
