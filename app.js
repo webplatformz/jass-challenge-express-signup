@@ -1,7 +1,7 @@
 import morgan from 'morgan';
 import config from 'config';
 import express from 'express';
-import redis from 'redis';
+import RedisClient from './server/redisClient';
 import bodyParser from 'body-parser';
 import compression from 'compression';
 import passport from 'passport';
@@ -14,12 +14,6 @@ const GITHUB_SECRET = config.get('githubSecret');
 const BITBUCKET_KEY = config.get('bitbucketKey');
 const BITBUCKET_SECRET = config.get('bitbucketSecret');
 
-// setup redis client
-const redisClient = redis.createClient({host: config.get('redisHost'), port: config.get('redisPort')});
-redisClient.on('start', () => {
-  console.log('redis up');
-});
-
 // support persistent login sessions
 passport.serializeUser((user, done) => {
   done(null, user);
@@ -28,10 +22,17 @@ passport.deserializeUser((obj, done) => {
   done(null, obj);
 });
 
+/**
+ * finds user profile based on result from authentication
+ * @param username: used as key in redis
+ * @param provider: who performed authentication (i.e. github or bitbucket)
+ * @param payload: result from authentication
+ * @param done: callback
+ */
 const findCreateProfile = (username, provider, payload, done) => {
 
   // find or create user profile
-  redisClient.hgetall(username, (err, stored) => {
+  RedisClient.hgetall(username, (err, stored) => {
     if (err) { throw err; }
 
     // new profile if none found
@@ -45,7 +46,7 @@ const findCreateProfile = (username, provider, payload, done) => {
         profile: payload
       };
 
-      redisClient.hmset(username, creatable, (err /*, status */) => {
+      RedisClient.hmset(username, creatable, (err /*, status */) => {
         if (err) { throw err; }
         return done(null, creatable);
       });
@@ -55,7 +56,9 @@ const findCreateProfile = (username, provider, payload, done) => {
   });
 };
 
-// github oauth2 with passport
+/**
+ * configure passport to use github strategy
+ */
 passport.use(new GithubStrategy({
     clientID: GITHUB_KEY,
     clientSecret: GITHUB_SECRET,
@@ -68,7 +71,9 @@ passport.use(new GithubStrategy({
   }
 ));
 
-// bitbucket oauth2 with passport
+/**
+ * configure passport to use bitbucket strategy
+ */
 passport.use(new BitbucketStrategy({
     clientID: BITBUCKET_KEY,
     clientSecret: BITBUCKET_SECRET,
@@ -94,25 +99,41 @@ app.get('/', (req, res) => {
   res.send('welcome');
 });
 
+/**
+ * authenticate with github
+ */
 app.get('/auth/github', passport.authenticate('github', { scope: ['user:email'] }), ( /*req, res */ ) => { /* redirects to github */ });
 
+/**
+ * authenticate with bitbucket
+ */
 app.get('/auth/bitbucket', passport.authenticate('bitbucket'), ( /*req, res */ ) => { /* redirects to bitbucket */ });
 
+/**
+ * callback from auth with github
+ */
 app.get('/auth/github/callback', passport.authenticate('github', { failureRedirect: '/error' }), (req, res) => {
   res.send({ user: req.user });
 });
 
+/**
+ * callback from auth with bitbucket
+ */
 app.get('/auth/bitbucket/callback', passport.authenticate('bitbucket', { failureRedirect: '/error' }), (req, res) => {
   res.send({ user: req.user });
 });
 
+/**
+ * logout
+ */
 app.get('/logout', (req, res) => {
   req.logout();
   res.redirect('/');
 });
 
-// TODO: move to separate file / module
-// method to enforce authentication on route
+/**
+ * enforces that user is authenticated
+ */
 const ensureAuthenticated = (req, res, next) => {
   if (req.isAuthenticated()) {
     return next();
@@ -120,14 +141,16 @@ const ensureAuthenticated = (req, res, next) => {
   res.redirect('/error');
 };
 
-// used to update user's profile (matrikel, email, etc.)
+/**
+ * update user profile
+ */
 app.patch('/users', ensureAuthenticated, (req, res) => {
 
   // profile to update is determined on user making request
   const username = req.user.username;
   const { email: email, matrikel: matrikel, school: school } = req.body;
 
-  redisClient.hmset(username, 'email', email, 'matrikel', matrikel, 'school', school, (err, reply) => {
+  RedisClient.hmset(username, 'email', email, 'matrikel', matrikel, 'school', school, (err, reply) => {
     if (err) {
       res.status(500).send('error updating profile');
     } else {
