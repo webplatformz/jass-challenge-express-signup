@@ -22,7 +22,7 @@ const AppNavbar = ({isTransparent}) => {
       </NavbarHeader>
       <NavbarCollapse>
         <Nav pullRight>
-          <NavItem>About</NavItem>
+          <NavItem href={'/#about'}>About</NavItem>
           <LinkContainer to="/signup">
             <NavItem>Sign Up</NavItem>
           </LinkContainer>

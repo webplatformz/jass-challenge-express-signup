@@ -18,9 +18,7 @@ const HeroSection = () => {
                 <LinkContainer to="/signup">
                   <Button className="transparent">Sign Up Here</Button>
                 </LinkContainer>
-                <LinkContainer to="#about">
-                  <Button className="transparent">TODO: dead link to about</Button>
-                </LinkContainer>
+                <Button href={'/#about'} className="transparent">More Information</Button>
               </div>
             </Col>
           </Row>

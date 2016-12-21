@@ -1,11 +1,14 @@
 import React from 'react';
+import Anchor from '../nav/Anchor';
+import ScrollSpy from '../nav/ScrollSpy';
 
 import { Col, Row } from 'react-bootstrap';
 
-const AboutSection = () => {
+const AboutSection = ({ onBefore, onAfter }) => {
   return (
     <div>
-      <a name="about"></a>
+      <ScrollSpy href={'#about'} onBefore={onBefore} onAfter={onAfter}/>
+      <Anchor id="about"></Anchor>
       <div className="content-section-a">
         <div className="container">
           <Row>
@@ -21,5 +24,10 @@ const AboutSection = () => {
     </div>
   );
 };
+
+AboutSection.propTypes = {
+  onBefore: React.PropTypes.any,
+  onAfter: React.PropTypes.any,
+}
 
 export default AboutSection;
