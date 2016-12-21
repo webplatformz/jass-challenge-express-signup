@@ -1,13 +1,13 @@
-const config = require('config');
-const morgan = require('morgan');
-const express = require('express');
-const redis = require('redis');
-const bodyParser = require('body-parser');
-const compress = require('compression');
-const passport = require('passport');
-const expressSession = require('express-session');
-const GithubStrategy = require('passport-github2').Strategy;
-const BitbucketStrategy = require('passport-bitbucket-oauth2').Strategy;
+import morgan from 'morgan';
+import config from 'config';
+import express from 'express';
+import redis from 'redis';
+import bodyParser from 'body-parser';
+import compression from 'compression';
+import passport from 'passport';
+import expressSession from 'express-session';
+import { Strategy as GithubStrategy } from 'passport-github2';
+import { Strategy as BitbucketStrategy } from 'passport-bitbucket-oauth2';
 
 const GITHUB_KEY = config.get('githubKey');
 const GITHUB_SECRET = config.get('githubSecret');
@@ -15,7 +15,10 @@ const BITBUCKET_KEY = config.get('bitbucketKey');
 const BITBUCKET_SECRET = config.get('bitbucketSecret');
 
 // setup redis client
-const redisClient = redis.createClient({host: 'localhost', port: 6379});
+const redisClient = redis.createClient({host: config.get('redisHost'), port: config.get('redisPort')});
+redisClient.on('start', () => {
+  console.log('redis up');
+});
 
 // support persistent login sessions
 passport.serializeUser((user, done) => {
@@ -85,7 +88,7 @@ app.use(bodyParser.json());
 app.use(expressSession({ secret: 'keyboard cat', resave: false, saveUninitialized: false }));
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(compress());
+app.use(compression());
 
 app.get('/', (req, res) => {
   res.send('welcome');
@@ -135,3 +138,4 @@ app.patch('/users', ensureAuthenticated, (req, res) => {
 });
 
 app.listen(config.get('port'));
+console.log(`application listening on port ${config.get('port')}`);

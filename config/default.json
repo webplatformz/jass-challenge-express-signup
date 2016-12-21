@@ -4,5 +4,7 @@
   "bitbucketKey": "",
   "bitbucketSecret": "",
   "host": "127.0.0.1",
-  "port": 55555
+  "port": 55555,
+  "redisHost": "localhost",
+  "redisPort": 6379
 }

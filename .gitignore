@@ -1,3 +1,10 @@
+# build
+build
+
+# intellij
+.idea
+*.iml
+
 # Logs
 logs
 *.log
