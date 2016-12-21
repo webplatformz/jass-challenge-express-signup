@@ -95,8 +95,11 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(compression());
 
+// client dir as static resources
+app.use(express.static(__dirname + '/build/client'));
+
 app.get('/', (req, res) => {
-  res.send('welcome');
+  res.sendfile('index.html', { root: __dirname + '/build/client/index.html' });
 });
 
 /**
