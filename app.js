@@ -98,10 +98,6 @@ app.use(compression());
 // client dir as static resources
 app.use(express.static(__dirname + '/build/client'));
 
-app.get('/', (req, res) => {
-  res.sendfile('index.html', { root: __dirname + '/build/client/index.html' });
-});
-
 /**
  * authenticate with github
  */
@@ -132,6 +128,13 @@ app.get('/auth/bitbucket/callback', passport.authenticate('bitbucket', { failure
 app.get('/logout', (req, res) => {
   req.logout();
   res.redirect('/');
+});
+
+/**
+ * serve react app
+ */
+app.get('/*', (req, res) => {
+  res.sendfile('index.html', { root: __dirname + '/build/client' });
 });
 
 /**
