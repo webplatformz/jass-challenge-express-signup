@@ -6,6 +6,7 @@ import LandingPage from '../landing/LandingPage';
 import LandingLayout from '../landing/LandingLayout';
 import LoginPage from '../login/LoginPage';
 import SignupPage from '../signup/SignupPage';
+import ReposPage from '../profile/ReposPage';
 import ProfilePage from '../profile/ProfilePage';
 
 const AppRouter = () => {
@@ -17,6 +18,7 @@ const AppRouter = () => {
       <Route component={Layout}>
         <Route path="login" component={LoginPage}></Route>
         <Route path="signup" component={SignupPage}></Route>
+        <Route path="repos" component={ReposPage}></Route>
         <Route path="profile" component={ProfilePage}></Route>
       </Route>
     </Router>
