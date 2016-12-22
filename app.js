@@ -43,7 +43,7 @@ const findCreateProfile = (username, provider, payload, done) => {
         matrikel: '',
         school: '',
         provider: provider,
-        profile: payload
+        profile: payload._json
       };
 
       RedisClient.hmset(username, creatable, (err /*, status */) => {
@@ -111,14 +111,14 @@ app.get('/auth/bitbucket', passport.authenticate('bitbucket'), ( /*req, res */ )
 /**
  * callback from auth with github
  */
-app.get('/auth/github/callback', passport.authenticate('github', { failureRedirect: '/error' }), (req, res) => {
+app.get('/auth/github/callback', passport.authenticate('github', { failureRedirect: '/login' }), (req, res) => {
   res.send({ user: req.user });
 });
 
 /**
  * callback from auth with bitbucket
  */
-app.get('/auth/bitbucket/callback', passport.authenticate('bitbucket', { failureRedirect: '/error' }), (req, res) => {
+app.get('/auth/bitbucket/callback', passport.authenticate('bitbucket', { failureRedirect: '/login' }), (req, res) => {
   res.send({ user: req.user });
 });
 
