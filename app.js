@@ -95,8 +95,22 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(compression());
 
+// CORS
+app.use( (req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
 // client dir as static resources
 app.use(express.static(__dirname + '/build/client'));
+
+/**
+ * get user info of logged in user
+ */
+app.get('/auth/user', (req, res) => {
+  res.json({ user: req.user });
+});
 
 /**
  * authenticate with github
