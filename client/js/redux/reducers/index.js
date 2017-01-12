@@ -6,7 +6,7 @@ const initialState = {
   user: {}
 };
 
-const userReducer = (state = initialState, action) => {
+export const userReducer = (state = initialState, action) => {
   switch (action.type) {
     case REQUEST_LOGIN:
       return state;

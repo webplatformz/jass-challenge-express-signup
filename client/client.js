@@ -8,8 +8,9 @@ import reducer from './js/redux/reducers';
 import { fetchUser } from './js/redux/actions';
 import App from './js/App';
 
-const store = createStore(reducer, applyMiddleware(thunkMiddleware));
-store.dispatch(fetchUser());
+const preloadedState = window.__PRELOADED_STATE__;
+
+const store = createStore(reducer, preloadedState, applyMiddleware(thunkMiddleware));
 
 render(
   <Provider store={store}>

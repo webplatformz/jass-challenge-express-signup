@@ -9,6 +9,14 @@ import expressSession from 'express-session';
 import { Strategy as GithubStrategy } from 'passport-github2';
 import { Strategy as BitbucketStrategy } from 'passport-bitbucket-oauth2';
 
+import React from 'react';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import reducer from './client/js/redux/reducers';
+import App from './client/js/App';
+import { renderToString } from 'react-dom/server';
+
+
 const GITHUB_KEY = config.get('githubKey');
 const GITHUB_SECRET = config.get('githubSecret');
 const BITBUCKET_KEY = config.get('bitbucketKey');
@@ -103,7 +111,7 @@ app.use( (req, res, next) => {
 });
 
 // client dir as static resources
-app.use(express.static(__dirname + '/build/client'));
+app.use('/static', express.static(__dirname + '/build/client'));
 
 /**
  * get user info of logged in user
@@ -148,8 +156,42 @@ app.get('/logout', (req, res) => {
  * serve react app
  */
 app.get('/*', (req, res) => {
-  res.sendfile('index.html', { root: __dirname + '/build/client' });
+
+  // redux store instance
+  const store = createStore(reducer);
+
+  // Render the component to a string
+  const html = renderToString(
+    <Provider store={store}>
+      <App />
+    </Provider>
+  );
+
+  // initial state from store
+  const preloadedState = store.getState();
+
+  res.send(renderFullPage(html, preloadedState));
 });
+
+const renderFullPage = (html, preloadedState) => {
+  return `
+    <!DOCTYPE html>
+    <head>
+      <meta charset="utf-8"/>
+      <title>Jass Challenge Registration</title>
+      <link rel="stylesheet" href="static/styles/main.css">
+    </head>
+    <body>
+    <main>${html}</main>
+    <script>
+      // WARNING: See the following for Security isues with this approach:
+      // http://redux.js.org/docs/recipes/ServerRendering.html#security-considerations
+      window.__PRELOADED_STATE__ = ${JSON.stringify(preloadedState)}
+    </script>
+    <script src="static/client.js"></script>
+    </body>
+  `;
+};
 
 /**
  * enforces that user is authenticated

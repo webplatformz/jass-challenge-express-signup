@@ -1,5 +1,4 @@
 import api from '../api/user';
-import fetch from 'isomorphic-fetch';
 
 export const TRY_LOGIN = 'TRY_LOGIN';
 export const REQUEST_LOGIN = 'REQUEST_LOGIN';
@@ -17,17 +16,11 @@ export const loginSuccess = () => ({
 
 export const tryLogin = () => {
 
-  const request = {
-    method: 'GET',
-    redirect: 'follow',
-    mode: 'cors'
-  };
-
   return dispatch => {
     dispatch(requestLogin());
-    return fetch(`http://localhost:55555/auth/github`, request)
-      .then(response => response.json())
-      .then(json => dispatch(loginSuccess(json)));
+    history.pushState({}, "github auth", "http://127.0.0.1:55555/auth/github");
+    window.location = "http://127.0.0.1:55555/auth/github";
+    dispatch(fetchUser());
   };
 };
 
