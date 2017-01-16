@@ -1,22 +1,8 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
+import { authenticateGithub, authenticateBitbucket, logout } from '../actions';
 
-const UserContainer = ({ isAuthenticated, user: { email, school }}) => {
-
-  const loginGithub = () => {
-    history.pushState({}, "github auth", "http://127.0.0.1:55555/auth/github");
-    window.location = "http://127.0.0.1:55555/auth/github";
-  };
-
-  const loginBitbucket = () => {
-    history.pushState({}, "bitbucket auth", "http://127.0.0.1:55555/auth/bitbucket");
-    window.location = "http://127.0.0.1:55555/auth/bitbucket";
-  };
-
-  const logout = () => {
-    history.pushState({}, "logout", "http://127.0.0.1:55555/auth/logout");
-    window.location = "http://127.0.0.1:55555/auth/logout";
-  };
+const UserContainer = ({ isAuthenticated, user: { email, school }, onAuthenticateGithubClick, onAuthenticateBitbucketClick, onLogoutClick }) => {
 
   const authStatus = isAuthenticated ? 'logged in' : 'not logged in';
 
@@ -26,16 +12,19 @@ const UserContainer = ({ isAuthenticated, user: { email, school }}) => {
       <h3>{authStatus}</h3>
       <h3>{email}</h3>
       <h3>{school}</h3>
-      <button onClick={() => loginGithub()}>Login with Github</button>
-      <button onClick={() => loginBitbucket()}>Login with Bitbucket</button>
-      <button onClick={() => logout()}>Logout</button>
+      <button onClick={() => onAuthenticateGithubClick()}>Login with Github</button>
+      <button onClick={() => onAuthenticateBitbucketClick()}>Login with Bitbucket</button>
+      <button onClick={() => onLogoutClick()}>Logout</button>
     </div>
   );
 };
 
 UserContainer.propTypes = {
   isAuthenticated: PropTypes.bool,
-  user: PropTypes.object
+  user: PropTypes.object,
+  onAuthenticateGithubClick: PropTypes.func,
+  onAuthenticateBitbucketClick: PropTypes.func,
+  onLogoutClick: PropTypes.func,
 };
 
 const mapStateToProps = (state) => ({
@@ -44,5 +33,6 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(
-  mapStateToProps
+  mapStateToProps,
+  { onAuthenticateGithubClick: authenticateGithub, onAuthenticateBitbucketClick: authenticateBitbucket, onLogoutClick: logout}
 )(UserContainer);
