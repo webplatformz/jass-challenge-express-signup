@@ -16,6 +16,7 @@ import reducer from './client/js/redux/reducers';
 import App from './client/js/App';
 import { renderToString } from 'react-dom/server';
 
+import { LOGIN } from './client/js/redux/actions';
 
 const GITHUB_KEY = config.get('githubKey');
 const GITHUB_SECRET = config.get('githubSecret');
@@ -134,20 +135,20 @@ app.get('/auth/bitbucket', passport.authenticate('bitbucket'), ( /*req, res */ )
  * callback from auth with github
  */
 app.get('/auth/github/callback', passport.authenticate('github', { failureRedirect: '/login' }), (req, res) => {
-  res.send({ user: req.user });
+  res.redirect('/');
 });
 
 /**
  * callback from auth with bitbucket
  */
 app.get('/auth/bitbucket/callback', passport.authenticate('bitbucket', { failureRedirect: '/login' }), (req, res) => {
-  res.send({ user: req.user });
+  res.redirect('/');
 });
 
 /**
  * logout
  */
-app.get('/logout', (req, res) => {
+app.get('/auth/logout', (req, res) => {
   req.logout();
   res.redirect('/');
 });
@@ -167,8 +168,17 @@ app.get('/*', (req, res) => {
     </Provider>
   );
 
+  // check if user authenticated and override store's initial state
+  if (req.isAuthenticated() && req.user) {
+    store.dispatch({
+      type: LOGIN,
+      isAuthenticated: true,
+      user: req.user
+    });
+  }
+
   // initial state from store
-  const preloadedState = store.getState();
+  let preloadedState = store.getState();
 
   res.send(renderFullPage(html, preloadedState));
 });
@@ -184,7 +194,7 @@ const renderFullPage = (html, preloadedState) => {
     <body>
     <main>${html}</main>
     <script>
-      // WARNING: See the following for Security isues with this approach:
+      // WARNING: See the following for Security issues with this approach:
       // http://redux.js.org/docs/recipes/ServerRendering.html#security-considerations
       window.__PRELOADED_STATE__ = ${JSON.stringify(preloadedState)}
     </script>
