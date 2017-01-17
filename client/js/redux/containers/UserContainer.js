@@ -1,30 +1,41 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
-import { authenticateGithub, authenticateBitbucket, logout } from '../actions';
+import { authenticateGithub, authenticateBitbucket, logout, checkAuth } from '../actions';
 
-const UserContainer = ({ isAuthenticated, user: { email, school }, onAuthenticateGithubClick, onAuthenticateBitbucketClick, onLogoutClick }) => {
+class UserContainer extends Component {
 
-  const authStatus = isAuthenticated ? 'logged in' : 'not logged in';
 
-  return (
-    <div>
-      <h3>props should be displayed here</h3>
-      <h3>{authStatus}</h3>
-      <h3>{email}</h3>
-      <h3>{school}</h3>
-      <button onClick={() => onAuthenticateGithubClick()}>Login with Github</button>
-      <button onClick={() => onAuthenticateBitbucketClick()}>Login with Bitbucket</button>
-      <button onClick={() => onLogoutClick()}>Logout</button>
-    </div>
-  );
+  componentWillMount() {
+    this.props.onCheckAuth();
+  }
+
+  render() {
+
+    const authStatus = this.props.isAuthenticated ? 'logged in' : 'not logged in';
+    const email = this.props.user.email ? this.props.user.email : 'not defined';
+    const school = this.props.user.school ? this.props.user.school : 'not defined';
+
+    return (
+      <div>
+        <h3>props should be displayed here</h3>
+        <h3>{authStatus}</h3>
+        <h3>{email}</h3>
+        <h3>{school}</h3>
+        <button onClick={() => this.props.onAuthenticateGithubClick()}>Login with Github</button>
+        <button onClick={() => this.props.onAuthenticateBitbucketClick()}>Login with Bitbucket</button>
+        <button onClick={() => this.props.onLogoutClick()}>Logout</button>
+      </div>
+    );
+  }
 };
 
 UserContainer.propTypes = {
   isAuthenticated: PropTypes.bool,
   user: PropTypes.object,
+  onCheckAuth: PropTypes.func,
   onAuthenticateGithubClick: PropTypes.func,
   onAuthenticateBitbucketClick: PropTypes.func,
-  onLogoutClick: PropTypes.func,
+  onLogoutClick: PropTypes.func
 };
 
 const mapStateToProps = (state) => ({
@@ -34,5 +45,5 @@ const mapStateToProps = (state) => ({
 
 export default connect(
   mapStateToProps,
-  { onAuthenticateGithubClick: authenticateGithub, onAuthenticateBitbucketClick: authenticateBitbucket, onLogoutClick: logout}
+  { onAuthenticateGithubClick: authenticateGithub, onAuthenticateBitbucketClick: authenticateBitbucket, onLogoutClick: logout, onCheckAuth: checkAuth }
 )(UserContainer);

@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { LOGIN, AUTHENTICATE_GITHUB, AUTHENTICATE_BITBUCKET, LOGOUT } from '../actions';
+import { CHECK_AUTH, LOGIN_SUCCESS, AUTHENTICATE_GITHUB, AUTHENTICATE_BITBUCKET, LOGOUT } from '../actions';
 
 const initialState = {
   isAuthenticated: false,
@@ -9,7 +9,7 @@ const initialState = {
 export const userReducer = (state = initialState, action) => {
   switch (action.type) {
 
-    case LOGIN:
+    case LOGIN_SUCCESS:
       return Object.assign({}, state, {
         isAuthenticated: action.isAuthenticated,
         user: action.user
