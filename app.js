@@ -23,6 +23,9 @@ const GITHUB_SECRET = config.get('githubSecret');
 const BITBUCKET_KEY = config.get('bitbucketKey');
 const BITBUCKET_SECRET = config.get('bitbucketSecret');
 
+// configure redis store for persistent session storage
+const RedisStore = require('connect-redis')(expressSession);
+
 // support persistent login sessions
 passport.serializeUser((user, done) => {
   done(null, user);
@@ -99,7 +102,14 @@ passport.use(new BitbucketStrategy({
 const app = express();
 app.use(morgan('combined'));
 app.use(bodyParser.json());
-app.use(expressSession({ secret: 'keyboard cat', resave: false, saveUninitialized: false }));
+app.use(expressSession({
+  store: new RedisStore({
+    client: RedisClient
+  }),
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: false
+}));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(compression());
@@ -112,7 +122,7 @@ app.use( (req, res, next) => {
 });
 
 // client dir as static resources
-app.use('/static', express.static(__dirname + '/build/client'));
+app.use(express.static(__dirname + '/build/client/assets'));
 
 /**
  * get user info of logged in user
@@ -157,51 +167,8 @@ app.get('/auth/logout', (req, res) => {
  * serve react app
  */
 app.get('/*', (req, res) => {
-
-  // redux store instance
-  const store = createStore(reducer);
-
-  // Render the component to a string
-  const html = renderToString(
-    <Provider store={store}>
-      <App />
-    </Provider>
-  );
-
-  // check if user authenticated and override store's initial state
-  if (req.isAuthenticated() && req.user) {
-    store.dispatch({
-      type: LOGIN,
-      isAuthenticated: true,
-      user: req.user
-    });
-  }
-
-  // initial state from store
-  let preloadedState = store.getState();
-
-  res.send(renderFullPage(html, preloadedState));
+  res.sendFile('index.html', { root: __dirname + '/build/client' });
 });
-
-const renderFullPage = (html, preloadedState) => {
-  return `
-    <!DOCTYPE html>
-    <head>
-      <meta charset="utf-8"/>
-      <title>Jass Challenge Registration</title>
-      <link rel="stylesheet" href="static/styles/main.css">
-    </head>
-    <body>
-    <main>${html}</main>
-    <script>
-      // WARNING: See the following for Security issues with this approach:
-      // http://redux.js.org/docs/recipes/ServerRendering.html#security-considerations
-      window.__PRELOADED_STATE__ = ${JSON.stringify(preloadedState)}
-    </script>
-    <script src="static/client.js"></script>
-    </body>
-  `;
-};
 
 /**
  * enforces that user is authenticated
