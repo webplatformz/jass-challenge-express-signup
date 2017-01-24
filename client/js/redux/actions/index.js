@@ -8,27 +8,17 @@ export const LOGOUT = 'LOGOUT';
 
 export const checkAuth = () => {
   return dispatch => {
-    return fetch(`http://localhost:55555/auth/user`, {
+    return fetch(`http://127.0.0.1:55555/auth/user`, {
       credentials: 'include'
     })
       .then(response => response.json())
       .then(json => {
-        console.log(json);
-
-        let isAuthenticated = false;
-        let user = {};
-        if (user.username) {
-          isAuthenticated = true;
-          user = json;
-        }
-        return dispatch(loginSuccess(isAuthenticated, user));
+        return dispatch(loginSuccess(json.isAuthenticated, json.user));
       });
   };
 };
 
 export const loginSuccess = (isAuthenticated, user) => {
-  console.log(isAuthenticated);
-  console.log(user);
   return {
     type: LOGIN_SUCCESS,
     isAuthenticated,

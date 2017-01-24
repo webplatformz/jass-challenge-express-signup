@@ -128,7 +128,9 @@ app.use(express.static(__dirname + '/build/client/assets'));
  * get user info of logged in user
  */
 app.get('/auth/user', (req, res) => {
-  res.json({ user: req.user });
+  const user = req.user || {};
+  const isAuthenticated = req.isAuthenticated();
+  res.json({ isAuthenticated: isAuthenticated, user: user });
 });
 
 /**

@@ -12,8 +12,8 @@ class UserContainer extends Component {
   render() {
 
     const authStatus = this.props.isAuthenticated ? 'logged in' : 'not logged in';
-    const email = this.props.user.email ? this.props.user.email : 'not defined';
-    const school = this.props.user.school ? this.props.user.school : 'not defined';
+    const email = this.props.user.username ? this.props.user.username : 'not defined';
+    const school = this.props.user.provider ? this.props.user.provider : 'not defined';
 
     return (
       <div>
