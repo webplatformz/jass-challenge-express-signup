@@ -147,14 +147,14 @@ app.get('/auth/bitbucket', passport.authenticate('bitbucket'), ( /*req, res */ )
  * callback from auth with github
  */
 app.get('/auth/github/callback', passport.authenticate('github', { failureRedirect: '/login' }), (req, res) => {
-  res.redirect('/');
+  res.redirect('/profile');
 });
 
 /**
  * callback from auth with bitbucket
  */
 app.get('/auth/bitbucket/callback', passport.authenticate('bitbucket', { failureRedirect: '/login' }), (req, res) => {
-  res.redirect('/');
+  res.redirect('/profile');
 });
 
 /**
