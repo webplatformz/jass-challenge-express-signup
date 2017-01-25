@@ -6,6 +6,8 @@ export const AUTHENTICATE_GITHUB = 'AUTHENTICATE_GITHUB';
 export const AUTHENTICATE_BITBUCKET = 'AUTHENTICATE_BITBUCKET';
 export const LOGOUT = 'LOGOUT';
 
+export const TOGGLE_EDIT_PROFILE = 'TOGGLE_EDIT_PROFILE';
+
 export const checkAuth = () => {
   return dispatch => {
     return fetch(`http://127.0.0.1:55555/auth/user`, {
@@ -41,5 +43,11 @@ export const authenticateBitbucket = () => {
 export const logout = () => {
   return {
     type: LOGOUT
+  };
+};
+
+export const toggleEditingProfile = () => {
+  return {
+    type: TOGGLE_EDIT_PROFILE
   };
 };

@@ -25,8 +25,8 @@ const AppRouter = ({ isAuthenticated }) => {
       <Route component={Layout}>
         <Route path="login" component={LoginPage}></Route>
         <Route path="signup" component={SignupPage}></Route>
-        <Route path="repos" component={ReposPage} onEnter={requireAuth}></Route>
-        <Route path="profile" component={ProfilePage} onEnter={requireAuth}></Route>
+        <Route path="repos" component={ReposPage} /*onEnter={requireAuth}*/></Route>
+        <Route path="profile" component={ProfilePage} /*onEnter={requireAuth}*/></Route>
       </Route>
     </Router>
   );

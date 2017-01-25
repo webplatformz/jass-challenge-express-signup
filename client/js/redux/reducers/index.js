@@ -1,9 +1,10 @@
 import { combineReducers } from 'redux';
-import { CHECK_AUTH, LOGIN_SUCCESS, AUTHENTICATE_GITHUB, AUTHENTICATE_BITBUCKET, LOGOUT } from '../actions';
+import { CHECK_AUTH, LOGIN_SUCCESS, AUTHENTICATE_GITHUB, AUTHENTICATE_BITBUCKET, LOGOUT, TOGGLE_EDIT_PROFILE } from '../actions';
 
 const initialState = {
   isAuthenticated: false,
-  user: {}
+  user: {},
+  isEditingProfile: false
 };
 
 export const userReducer = (state = initialState, action) => {
@@ -29,6 +30,11 @@ export const userReducer = (state = initialState, action) => {
       history.pushState({}, "logout", "http://127.0.0.1:55555/auth/logout");
       window.location = "http://127.0.0.1:55555/auth/logout";
       return Object.assign({}, state);
+
+    case TOGGLE_EDIT_PROFILE:
+      return Object.assign({}, state, {
+        isEditingProfile: !state.isEditingProfile
+      });
 
     default:
       return state;
