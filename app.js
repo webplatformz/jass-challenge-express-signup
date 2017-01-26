@@ -1,22 +1,13 @@
-import morgan from 'morgan';
-import config from 'config';
-import express from 'express';
-import RedisClient from './server/redisClient';
-import bodyParser from 'body-parser';
-import compression from 'compression';
-import passport from 'passport';
-import expressSession from 'express-session';
-import { Strategy as GithubStrategy } from 'passport-github2';
-import { Strategy as BitbucketStrategy } from 'passport-bitbucket-oauth2';
-
-import React from 'react';
-import { createStore } from 'redux';
-import { Provider } from 'react-redux';
-import reducer from './client/js/redux/reducers';
-import App from './client/js/App';
-import { renderToString } from 'react-dom/server';
-
-import { LOGIN } from './client/js/redux/actions';
+const morgan = require('morgan');
+const config = require('config');
+const express = require('express');
+const RedisClient = require('./server/redisClient');
+const bodyParser = require('body-parser');
+const compression = require('compression');
+const passport = require('passport');
+const expressSession = require('express-session');
+const GithubStrategy = require('passport-github2').Strategy;
+const BitbucketStrategy = require('passport-bitbucket-oauth2').Strategy;
 
 const GITHUB_KEY = config.get('githubKey');
 const GITHUB_SECRET = config.get('githubSecret');
@@ -74,7 +65,7 @@ const findCreateProfile = (username, provider, payload, done) => {
 passport.use(new GithubStrategy({
     clientID: GITHUB_KEY,
     clientSecret: GITHUB_SECRET,
-    callbackURL: `http://${config.get('host')}:${config.get('port')}/auth/github/callback`
+    callbackURL: `http://${config.get('host')}:${config.get('proxy')}/api/auth/github/callback`
   },
   (accesstoken, refreshtoken, githubProfile, done) => {
     const provider = 'github';
@@ -89,7 +80,7 @@ passport.use(new GithubStrategy({
 passport.use(new BitbucketStrategy({
     clientID: BITBUCKET_KEY,
     clientSecret: BITBUCKET_SECRET,
-    callbackURL: `http://${config.get('host')}:${config.get('port')}/auth/bitbucket/callback`
+    callbackURL: `http://${config.get('host')}:${config.get('proxy')}/api/auth/bitbucket/callback`
   },
   (token, tokenSecret, bitbucketProfile, done) => {
     const provider = 'bitbucket';
@@ -114,20 +105,13 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(compression());
 
-// CORS
-app.use( (req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-});
-
 // client dir as static resources
-app.use(express.static(__dirname + '/build/client/assets'));
+app.use(express.static(__dirname + '/build/client'));
 
 /**
  * get user info of logged in user
  */
-app.get('/auth/user', (req, res) => {
+app.get('/api/auth/user', (req, res) => {
   const user = req.user || {};
   const isAuthenticated = req.isAuthenticated();
   res.json({ isAuthenticated: isAuthenticated, user: user });
@@ -136,31 +120,31 @@ app.get('/auth/user', (req, res) => {
 /**
  * authenticate with github
  */
-app.get('/auth/github', passport.authenticate('github', { scope: ['user:email'] }), ( /*req, res */ ) => { /* redirects to github */ });
+app.get('/api/auth/github', passport.authenticate('github', { scope: ['user:email'] }), ( /*req, res */ ) => { /* redirects to github */ });
 
 /**
  * authenticate with bitbucket
  */
-app.get('/auth/bitbucket', passport.authenticate('bitbucket'), ( /*req, res */ ) => { /* redirects to bitbucket */ });
+app.get('/api/auth/bitbucket', passport.authenticate('bitbucket'), ( /*req, res */ ) => { /* redirects to bitbucket */ });
 
 /**
  * callback from auth with github
  */
-app.get('/auth/github/callback', passport.authenticate('github', { failureRedirect: '/login' }), (req, res) => {
+app.get('/api/auth/github/callback', passport.authenticate('github', { failureRedirect: '/login' }), (req, res) => {
   res.redirect('/profile');
 });
 
 /**
  * callback from auth with bitbucket
  */
-app.get('/auth/bitbucket/callback', passport.authenticate('bitbucket', { failureRedirect: '/login' }), (req, res) => {
+app.get('/api/auth/bitbucket/callback', passport.authenticate('bitbucket', { failureRedirect: '/login' }), (req, res) => {
   res.redirect('/profile');
 });
 
 /**
  * logout
  */
-app.get('/auth/logout', (req, res) => {
+app.get('/api/auth/logout', (req, res) => {
   req.logout();
   res.redirect('/');
 });
@@ -185,7 +169,7 @@ const ensureAuthenticated = (req, res, next) => {
 /**
  * update user profile
  */
-app.patch('/users', ensureAuthenticated, (req, res) => {
+app.patch('/api/users', ensureAuthenticated, (req, res) => {
 
   // profile to update is determined on user making request
   const username = req.user.username;

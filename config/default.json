@@ -3,8 +3,9 @@
   "githubSecret": "",
   "bitbucketKey": "",
   "bitbucketSecret": "",
-  "host": "127.0.0.1",
-  "port": 55555,
+  "host": "localhost",
+  "proxy": 3001,
+  "port": 3000,
   "redisHost": "localhost",
   "redisPort": 6379
 }

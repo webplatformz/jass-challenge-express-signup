@@ -14,7 +14,7 @@ export const UPDATE_PROFILE_REQUEST = 'UPDATE_PROFILE_REQUEST';
 export const updateProfile = (profile) => {
   return dispatch => {
     dispatch(updateProfileRequest());
-    return fetch(`http://127.0.0.1:55555/user`, {
+    return fetch('/api/user', {
       credentials: 'include',
       method: 'PATCH',
       body: profile
@@ -51,7 +51,7 @@ export const updateProfileCancel = () => {
 
 export const checkAuth = () => {
   return dispatch => {
-    return fetch(`http://127.0.0.1:55555/auth/user`, {
+    return fetch('/api/auth/user', {
       credentials: 'include'
     })
       .then(response => response.json())

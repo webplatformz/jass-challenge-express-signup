@@ -8,36 +8,38 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "clean": "rimraf build && mkdirp build/server && mkdirp build/client",
+    "clean": "rimraf build && mkdirp build/client",
     "prebuild": "npm run clean",
-    "build:css": "lessc client/styles/main.less build/client/assets/styles/main.css",
-    "build:js:frontend": "browserify client/client.js -o build/client/assets/client.js -t [ babelify ]",
-    "build:js:backend": "browserify app.js -o build/server/app.js -t [ babelify ] --node --ignore-missing",
-    "build:html": "copyfiles -u 1 client/index.html build/client",
-    "build:resources": "copyfiles -u 1 \"client/images/**/*\" build/client/assets",
-    "build": "parallelshell \"npm run build:js:backend\" parallelshell \"npm run build:js:frontend\" \"npm run build:css\" \"npm run build:html\" \"npm run build:resources\"",
+    "build": "webpack",
     "prestart": "npm run build",
-    "start": "node build/server/app.js"
+    "start": "node app.js",
+    "dev": "parallelshell \"webpack-dev-server\" \"nodemon app.js\""
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "babel-core": "6.21.0",
+    "babel-loader": "6.2.10",
     "babel-polyfill": "6.20.0",
     "babel-preset-es2015": "6.18.0",
     "babel-preset-react": "6.16.0",
     "babelify": "7.3.0",
     "body-parser": "1.15.2",
-    "bootstrap-less": "^3.3.8",
+    "bootstrap-less": "3.3.8",
     "browserify": "13.1.1",
     "compression": "1.6.2",
     "config": "1.24.0",
-    "connect-redis": "^3.2.0",
+    "connect-redis": "3.2.0",
+    "copy-webpack-plugin": "4.0.1",
     "copyfiles": "1.0.0",
+    "css-loader": "0.26.1",
     "express": "4.14.0",
     "express-session": "1.14.2",
     "fetch": "1.1.0",
-    "less": "^2.7.1",
+    "file-loader": "0.9.0",
+    "html-webpack-plugin": "2.26.0",
+    "less": "2.7.1",
+    "less-loader": "2.2.3",
     "mkdirp": "0.5.1",
     "morgan": "1.7.0",
     "parallelshell": "2.0.0",
@@ -53,8 +55,11 @@
     "react-waypoint": "4.1.0",
     "redis": "2.6.3",
     "redux": "3.6.0",
-    "redux-thunk": "^2.1.0",
-    "rimraf": "2.5.4"
+    "redux-thunk": "2.1.0",
+    "rimraf": "2.5.4",
+    "style-loader": "0.13.1",
+    "url-loader": "0.5.7",
+    "webpack": "2.2.0"
   },
   "devDependencies": {
     "babel-eslint": "7.1.1",
@@ -62,6 +67,7 @@
     "eslint-plugin-node": "3.0.5",
     "nodemon": "1.11.0",
     "watch": "1.0.1",
-    "watchify": "3.7.0"
+    "watchify": "3.7.0",
+    "webpack-dev-server": "2.2.0"
   }
 }
