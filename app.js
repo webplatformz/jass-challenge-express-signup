@@ -55,7 +55,7 @@ const findCreateProfile = (username, provider, payload, done) => {
         matrikel: '',
         school: '',
         provider: provider,
-        profile: payload._json
+        profile: JSON.parse(JSON.stringify(payload._json))
       };
 
       RedisClient.hmset(username, creatable, (err /*, status */) => {

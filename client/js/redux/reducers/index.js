@@ -3,13 +3,10 @@ import { CHECK_AUTH, LOGIN_SUCCESS, AUTHENTICATE_GITHUB, AUTHENTICATE_BITBUCKET,
 
 const initialState = {
   isAuthenticated: false,
-  user: {},
+  user: {
+    profile: {}
+  },
   isEditingProfile: false,
-  profileForm: {
-    email: '',
-    matrikel: '',
-    school: ''
-  }
 };
 
 export const userReducer = (state = initialState, action) => {
@@ -49,7 +46,6 @@ export const userReducer = (state = initialState, action) => {
     case UPDATE_PROFILE_SUCCESS:
       return Object.assign({}, state, {
         isUpdatingProfile: false,
-        profileForm: {},
         user: action.user
       });
 
