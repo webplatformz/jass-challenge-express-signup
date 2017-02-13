@@ -22,7 +22,12 @@ passport.serializeUser((user, done) => {
   done(null, user);
 });
 passport.deserializeUser((obj, done) => {
-  done(null, obj);
+  RedisClient.hgetall(obj.username, (err, stored) => {
+    const parsed = Object.assign({}, stored, {
+      profile: JSON.parse(stored.profile)
+    });
+    done(null, parsed);
+  });
 });
 
 /**
@@ -33,7 +38,6 @@ passport.deserializeUser((obj, done) => {
  * @param done: callback
  */
 const findCreateProfile = (username, provider, payload, done) => {
-
   // find or create user profile
   RedisClient.hgetall(username, (err, stored) => {
     if (err) { throw err; }
@@ -46,7 +50,7 @@ const findCreateProfile = (username, provider, payload, done) => {
         matrikel: '',
         school: '',
         provider: provider,
-        profile: JSON.parse(JSON.stringify(payload._json))
+        profile: payload._raw
       };
 
       RedisClient.hmset(username, creatable, (err /*, status */) => {
@@ -179,7 +183,7 @@ app.patch('/api/users', ensureAuthenticated, (req, res) => {
     if (err) {
       res.status(500).send('error updating profile');
     } else {
-      res.status(201);
+      res.status(204);
     }
     res.send(reply);
   });

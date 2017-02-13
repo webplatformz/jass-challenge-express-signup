@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { LOGIN_SUCCESS, AUTHENTICATE_GITHUB, AUTHENTICATE_BITBUCKET, LOGOUT, TOGGLE_EDIT_PROFILE, UPDATE_PROFILE_SUCCESS, UPDATE_PROFILE_CANCEL, UPDATE_PROFILE_REQUEST } from '../actions/index';
+import { LOGIN_SUCCESS, AUTHENTICATE_GITHUB, AUTHENTICATE_BITBUCKET, LOGOUT, TOGGLE_EDIT_PROFILE, UPDATE_PROFILE_CANCEL, UPDATE_PROFILE_REQUEST } from '../actions/index';
 
 const initialState = {
   isAuthenticated: false,
@@ -43,15 +43,9 @@ export const userReducer = (state = initialState, action) => {
         isUpdatingProfile: true
       });
 
-    case UPDATE_PROFILE_SUCCESS:
-      return Object.assign({}, state, {
-        isUpdatingProfile: false,
-        user: action.user
-      });
-
     case UPDATE_PROFILE_CANCEL:
       return Object.assign({}, state, {
-        isUpdatingProfile: false
+        isEditingProfile: false
       });
 
     default:

@@ -1,15 +1,15 @@
 import React, { Component, PropTypes } from 'react';
 
 import { Button, Form, FormGroup, FormControl, Col, ControlLabel, } from 'react-bootstrap';
-import { toggleEditingProfile } from '../redux/actions';
+import { toggleEditingProfile } from '../redux/actions/index';
 import { connect } from 'react-redux';
 
 import ProfileForm from './ProfileForm';
 import ProfileView from './ProfileView';
 
-const ProfilePage = ({ isEditingProfile, onToggleEditingProfile }) => {
+const ProfilePage = ({ isEditingProfile, onToggleEditingProfile, user: { email, matrikel, school } }) => {
 
-  const profileComponent = isEditingProfile ? <ProfileForm/> : <ProfileView/>;
+  const profileComponent = isEditingProfile ? <ProfileForm email={email} matrikel={matrikel} school={school}/> : <ProfileView/>;
   const editButton = isEditingProfile ? '' : <Button className="pull-right" onClick={onToggleEditingProfile}>Edit</Button>;
 
   return(
@@ -30,11 +30,13 @@ const ProfilePage = ({ isEditingProfile, onToggleEditingProfile }) => {
 
 ProfilePage.propTypes = {
   isEditingProfile: PropTypes.bool,
-  onToggleEditingProfile: PropTypes.func
+  onToggleEditingProfile: PropTypes.func,
+  user: PropTypes.object,
 };
 
 const mapStateToPros = (state) => ({
-  isEditingProfile: state.userReducer.isEditingProfile
+  isEditingProfile: state.userReducer.isEditingProfile,
+  user: state.userReducer.user,
 });
 
 export default connect(

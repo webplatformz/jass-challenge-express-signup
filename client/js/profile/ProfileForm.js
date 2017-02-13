@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 
 import { Button, Form, FormGroup, FormControl, Col, ControlLabel, } from 'react-bootstrap';
-import { toggleEditingProfile } from '../redux/actions';
+import { toggleEditingProfile, updateProfile } from '../redux/actions/index';
 import { connect } from 'react-redux';
 
 class ProfileForm extends Component {
@@ -9,14 +9,15 @@ class ProfileForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: '',
-      matrikel: '',
-      school: ''
+      email: props.email,
+      matrikel: props.matrikel,
+      school: props.school,
     };
 
     this.handleEmail = this.handleEmail.bind(this);
     this.handleMatrikel = this.handleMatrikel.bind(this);
     this.handleSchool = this.handleSchool.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   };
 
   handleEmail(event) {
@@ -32,7 +33,7 @@ class ProfileForm extends Component {
   }
 
   handleSubmit() {
-    console.log('handling submit');
+    this.props.onSubmitProfileData(this.state);
   }
 
   render() {
@@ -79,5 +80,5 @@ ProfileForm.propTypes = {
 
 export default connect(
   state => ({}),
-  { onToggleEditingProfile: toggleEditingProfile }
+  { onToggleEditingProfile: toggleEditingProfile, onSubmitProfileData: updateProfile }
 )(ProfileForm);

@@ -1,27 +1,28 @@
 import fetch from 'isomorphic-fetch';
 
-export const CHECK_AUTH = 'CHECK_AUTH';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const AUTHENTICATE_GITHUB = 'AUTHENTICATE_GITHUB';
 export const AUTHENTICATE_BITBUCKET = 'AUTHENTICATE_BITBUCKET';
 export const LOGOUT = 'LOGOUT';
 
 export const TOGGLE_EDIT_PROFILE = 'TOGGLE_EDIT_PROFILE';
-export const UPDATE_PROFILE_SUCCESS = 'UPDATE_PROFILE_SUCCESS';
 export const UPDATE_PROFILE_CANCEL = 'UPDATE_PROFILE_CANCEL';
 export const UPDATE_PROFILE_REQUEST = 'UPDATE_PROFILE_REQUEST';
 
 export const updateProfile = (profile) => {
   return dispatch => {
     dispatch(updateProfileRequest());
-    return fetch('/api/user', {
+    return fetch('/api/users', {
       credentials: 'include',
       method: 'PATCH',
-      body: profile
+      body: JSON.stringify(profile),
+      headers: {
+        'Content-Type': 'application/json'
+      }
     })
-      .then(response => response.json())
-      .then(updatedProfile => {
-        dispatch(updateProfileSuccess(updatedProfile));
+      .then( () => {
+        dispatch(checkAuth());
+        dispatch(updateProfileCancel());
       })
       .catch(error => {
         console.error(error);
@@ -33,13 +34,6 @@ export const updateProfile = (profile) => {
 export const updateProfileRequest = () => {
   return {
     type: UPDATE_PROFILE_REQUEST
-  };
-};
-
-export const updateProfileSuccess = (updatedProfile) => {
-  return {
-    type: UPDATE_PROFILE_SUCCESS,
-    user: updatedProfile
   };
 };
 
