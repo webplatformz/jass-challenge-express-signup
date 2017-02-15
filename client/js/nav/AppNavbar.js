@@ -1,17 +1,23 @@
 import React from 'react';
 
+import { connect } from 'react-redux';
+
 import { LinkContainer } from 'react-router-bootstrap';
 import { Link } from 'react-router';
 
-import Nav from 'react-bootstrap/lib/Nav';
-import NavItem from 'react-bootstrap/lib/NavItem';
 import Navbar from 'react-bootstrap/lib/Navbar';
 import NavbarHeader from 'react-bootstrap/lib/NavbarHeader';
 import NavbarBrand from 'react-bootstrap/lib/NavbarBrand';
 import NavbarToggle from 'react-bootstrap/lib/NavbarToggle';
 import NavbarCollapse from 'react-bootstrap/lib/NavbarCollapse';
 
-const AppNavbar = ({isTransparent}) => {
+import LoggedOutButtons from './LoggedOutButtons';
+import LoggedInButtons from './LoggedInButtons';
+
+const AppNavbar = ({ isTransparent, isAuthenticated }) => {
+
+  const buttons = isAuthenticated ? <LoggedInButtons/> : <LoggedOutButtons/>;
+
   return (
     <Navbar fixedTop className={isTransparent ? 'transparent' : ''}>
       <NavbarHeader>
@@ -21,22 +27,22 @@ const AppNavbar = ({isTransparent}) => {
         <NavbarToggle />
       </NavbarHeader>
       <NavbarCollapse>
-        <Nav pullRight>
-          <NavItem href={'/#about'}>About</NavItem>
-          <LinkContainer to="/signup">
-            <NavItem>Sign Up</NavItem>
-          </LinkContainer>
-          <LinkContainer to="/login">
-            <NavItem>Log In</NavItem>
-          </LinkContainer>
-        </Nav>
+        {buttons}
       </NavbarCollapse>
     </Navbar>
   );
 };
 
 AppNavbar.propTypes = {
-  isTransparent: React.PropTypes.bool
+  isTransparent: React.PropTypes.bool,
+  isAuthenticated: React.PropTypes.bool,
 };
 
-export default AppNavbar;
+const mapStateToPros = (state) => ({
+  isAuthenticated: state.userReducer.isAuthenticated,
+});
+
+export default connect(
+  mapStateToPros,
+  {}
+)(AppNavbar);
