@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PropTypes } from 'react';
 
 import { Button, Form, FormGroup, FormControl, Col, ControlLabel, } from 'react-bootstrap';
 import { toggleEditingProfile } from '../redux/actions/index';

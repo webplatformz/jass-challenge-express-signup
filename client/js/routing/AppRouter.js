@@ -6,7 +6,7 @@ import LandingPage from '../landing/LandingPage';
 import LandingLayout from '../landing/LandingLayout';
 import LoginPage from '../login/LoginPage';
 import SignupPage from '../signup/SignupPage';
-import ReposPage from '../profile/ReposPage';
+import ReposPage from '../repo/ReposPage';
 import ProfilePage from '../profile/ProfilePage';
 
 const AppRouter = ({ isAuthenticated }) => {
@@ -15,7 +15,7 @@ const AppRouter = ({ isAuthenticated }) => {
     if (!isAuthenticated) {
       replace({ pathname: '/login' });
     }
-  }
+  };
 
   return (
     <Router history={browserHistory}>

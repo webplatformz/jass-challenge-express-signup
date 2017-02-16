@@ -9,6 +9,8 @@ export const TOGGLE_EDIT_PROFILE = 'TOGGLE_EDIT_PROFILE';
 export const UPDATE_PROFILE_CANCEL = 'UPDATE_PROFILE_CANCEL';
 export const UPDATE_PROFILE_REQUEST = 'UPDATE_PROFILE_REQUEST';
 
+export const TOGGLE_EDIT_REPO = 'TOGGLE_EDIT_REPO';
+
 export const updateProfile = (profile) => {
   return dispatch => {
     dispatch(updateProfileRequest());
@@ -86,3 +88,10 @@ export const toggleEditingProfile = () => {
     type: TOGGLE_EDIT_PROFILE
   };
 };
+
+export const toggleEditingRepo = () => {
+  return {
+    type: TOGGLE_EDIT_REPO
+  };
+};
+
