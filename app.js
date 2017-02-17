@@ -39,6 +39,7 @@ passport.deserializeUser((obj, done) => {
  */
 const findCreateProfile = (username, provider, payload, done) => {
   // find or create user profile
+  console.log(`**** checking if user already exists: ${username}`);
   RedisClient.hgetall(username, (err, stored) => {
     if (err) { throw err; }
 
