@@ -13,7 +13,7 @@ const BotSection = () => {
               <hr className="section-heading-spacer" />
               <div className="clearfix"></div>
               <h2 className="section-heading">Info regarding bots / skeletons</h2>
-              <p className="lead">here goes the infor regarding the bots / skeletons for bots</p>
+              <p className="lead">here goes the info regarding the bots / skeletons for bots</p>
             </Col>
             <Col lg={5} lgOffset={2} sm={6}>
               <h5>JavaScript Bot</h5>
