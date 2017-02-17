@@ -8,7 +8,6 @@ const passport = require('passport');
 const expressSession = require('express-session');
 const GithubStrategy = require('passport-github2').Strategy;
 const BitbucketStrategy = require('passport-bitbucket-oauth2').Strategy;
-const connectTimeout = require('connect-timeout'); //express v4
 
 const GITHUB_KEY = config.get('githubKey');
 const GITHUB_SECRET = config.get('githubSecret');
@@ -198,5 +197,4 @@ app.patch('/api/users', ensureAuthenticated, (req, res) => {
 
 var port = process.env.PORT || config.get('port');
 app.listen(port);
-app.use(connectTimeout(120000));
 console.log(`application listening on port ${port}`);
