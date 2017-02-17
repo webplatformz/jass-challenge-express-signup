@@ -1,84 +1,101 @@
-import React, { Component, PropTypes } from 'react';
+import React, {Component, PropTypes} from 'react';
 
-import { Button, Form, FormGroup, FormControl, Col, ControlLabel, } from 'react-bootstrap';
-import { toggleEditingProfile, updateProfile } from '../redux/actions/index';
-import { connect } from 'react-redux';
+import {Button, Form, FormGroup, FormControl, Col, ControlLabel,} from 'react-bootstrap';
+import {toggleEditingProfile, updateProfile} from '../redux/actions/index';
+import {connect} from 'react-redux';
 
 class ProfileForm extends Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      email: props.email,
-      matrikel: props.matrikel,
-      school: props.school,
+    constructor(props) {
+        super(props);
+        this.state = {
+            email: props.email,
+            matrikel: props.matrikel,
+            school: props.school,
+            degreeProgram: props.degreeProgram
+        };
+
+        this.handleEmail = this.handleEmail.bind(this);
+        this.handleMatrikel = this.handleMatrikel.bind(this);
+        this.handleSchool = this.handleSchool.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleDegreeProgram = this.handleDegreeProgram.bind(this);
     };
 
-    this.handleEmail = this.handleEmail.bind(this);
-    this.handleMatrikel = this.handleMatrikel.bind(this);
-    this.handleSchool = this.handleSchool.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  };
+    handleEmail(event) {
+        this.setState({email: event.target.value});
+    }
 
-  handleEmail(event) {
-    this.setState({ email: event.target.value });
-  }
+    handleMatrikel(event) {
+        this.setState({matrikel: event.target.value});
+    }
 
-  handleMatrikel(event) {
-    this.setState({ matrikel: event.target.value });
-  }
+    handleSchool(event) {
+        this.setState({school: event.target.value});
+    }
 
-  handleSchool(event) {
-    this.setState({ school: event.target.value });
-  }
+    handleDegreeProgram(event) {
+        this.setState({degreeProgram: event.target.value});
+    }
 
-  handleSubmit() {
-    this.props.onSubmitProfileData(this.state);
-  }
+    handleSubmit() {
+        this.props.onSubmitProfileData(this.state);
+    }
 
-  render() {
-    return(
-      <Form horizontal>
-        <FormGroup controlId="formHorizontalEmail">
-          <Col sm={2}>
-            <label className="pull-right">E-mail</label>
-          </Col>
-          <Col sm={8}>
-            <input type="text" value={this.state.email} onChange={this.handleEmail} placeholder="E-mail" />
-          </Col>
-        </FormGroup>
-        <FormGroup controlId="formHorizontalMatrikel">
-          <Col sm={2}>
-            <label className="pull-right">Matrikel Number</label>
-          </Col>
-          <Col sm={8}>
-            <input type="text" value={this.state.matrikel} onChange={this.handleMatrikel} placeholder="Matrikel" />
-          </Col>
-        </FormGroup>
-        <FormGroup controlId="formHorizontalSchool">
-          <Col sm={2}>
-            <label className="pull-right">School</label>
-          </Col>
-          <Col sm={8}>
-            <input type="text" value={this.state.school} onChange={this.handleSchool} placeholder="Name of School" />
-          </Col>
-        </FormGroup>
-        <FormGroup>
-          <Col smOffset={2} sm={8}>
-            <Button className="pull-right" onClick={this.handleSubmit}>Submit</Button>
-            <Button onClick={this.props.onToggleEditingProfile}>Cancel</Button>
-          </Col>
-        </FormGroup>
-      </Form>
-    );
-  }
+    render() {
+        return (
+            <Form horizontal>
+                <FormGroup controlId="formHorizontalEmail">
+                    <Col sm={2}>
+                        <label className="pull-right">E-mail</label>
+                    </Col>
+                    <Col sm={8}>
+                        <input type="text" value={this.state.email} onChange={this.handleEmail} placeholder="E-mail"/>
+                    </Col>
+                </FormGroup>
+                <FormGroup controlId="formHorizontalMatrikel">
+                    <Col sm={2}>
+                        <label className="pull-right">Matrikel Number</label>
+                    </Col>
+                    <Col sm={8}>
+                        <input type="text" value={this.state.matrikel} onChange={this.handleMatrikel}
+                               placeholder="Matrikel"/>
+                    </Col>
+                </FormGroup>
+                <FormGroup controlId="formHorizontalSchool">
+                    <Col sm={2}>
+                        <label className="pull-right">School</label>
+                    </Col>
+                    <Col sm={8}>
+                        <input type="text" value={this.state.school} onChange={this.handleSchool}
+                               placeholder="Name of School"/>
+                    </Col>
+                </FormGroup>
+                <FormGroup controlId="formHorizontalDegreeProgram">
+                    <Col sm={2}>
+                        <label className="pull-right">Degree Program</label>
+                    </Col>
+                    <Col sm={8}>
+                        <input type="text" value={this.state.degreeProgram} onChange={this.handleDegreeProgram}
+                               placeholder="Degree Program"/>
+                    </Col>
+                </FormGroup>
+                <FormGroup>
+                    <Col smOffset={2} sm={8}>
+                        <Button className="pull-right" onClick={this.handleSubmit}>Submit</Button>
+                        <Button onClick={this.props.onToggleEditingProfile}>Cancel</Button>
+                    </Col>
+                </FormGroup>
+            </Form>
+        );
+    }
 }
 
 ProfileForm.propTypes = {
-  onToggleEditingProfile: PropTypes.func
+    onToggleEditingProfile: PropTypes.func
 };
 
 export default connect(
-  state => ({}),
-  { onToggleEditingProfile: toggleEditingProfile, onSubmitProfileData: updateProfile }
+    state => ({}),
+    {onToggleEditingProfile: toggleEditingProfile, onSubmitProfileData: updateProfile}
 )(ProfileForm);

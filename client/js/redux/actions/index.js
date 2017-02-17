@@ -12,86 +12,86 @@ export const UPDATE_PROFILE_REQUEST = 'UPDATE_PROFILE_REQUEST';
 export const TOGGLE_EDIT_REPO = 'TOGGLE_EDIT_REPO';
 
 export const updateProfile = (profile) => {
-  return dispatch => {
-    dispatch(updateProfileRequest());
-    return fetch('/api/users', {
-      credentials: 'include',
-      method: 'PATCH',
-      body: JSON.stringify(profile),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-      .then( () => {
-        dispatch(checkAuth());
-        dispatch(updateProfileCancel());
-      })
-      .catch(error => {
-        console.error(error);
-        dispatch(updateProfileCancel());
-      });
-  };
+    return dispatch => {
+        dispatch(updateProfileRequest());
+        return fetch('/api/users', {
+            credentials: 'include',
+            method: 'PATCH',
+            body: JSON.stringify(profile),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(() => {
+                dispatch(checkAuth());
+                dispatch(updateProfileCancel());
+            })
+            .catch(error => {
+                console.error(error);
+                dispatch(updateProfileCancel());
+            });
+    };
 };
 
 export const updateProfileRequest = () => {
-  return {
-    type: UPDATE_PROFILE_REQUEST
-  };
+    return {
+        type: UPDATE_PROFILE_REQUEST
+    };
 };
 
 export const updateProfileCancel = () => {
-  return {
-    type: UPDATE_PROFILE_CANCEL
-  };
+    return {
+        type: UPDATE_PROFILE_CANCEL
+    };
 };
 
 export const checkAuth = () => {
-  return dispatch => {
-    return fetch('/api/auth/user', {
-      credentials: 'include'
-    })
-      .then(response => response.json())
-      .then(json => {
-        return dispatch(loginSuccess(json.isAuthenticated, json.user));
-      });
-  };
+    return dispatch => {
+        return fetch('/api/auth/user', {
+            credentials: 'include'
+        })
+            .then(response => response.json())
+            .then(json => {
+                return dispatch(loginSuccess(json.isAuthenticated, json.user));
+            });
+    };
 };
 
 export const loginSuccess = (isAuthenticated, user) => {
-  return {
-    type: LOGIN_SUCCESS,
-    isAuthenticated,
-    user
-  };
+    return {
+        type: LOGIN_SUCCESS,
+        isAuthenticated,
+        user
+    };
 };
 
 export const authenticateGithub = () => {
-  return {
-    type: AUTHENTICATE_GITHUB
-  };
+    return {
+        type: AUTHENTICATE_GITHUB
+    };
 };
 
 export const authenticateBitbucket = () => {
-  return {
-    type: AUTHENTICATE_BITBUCKET
-  };
+    return {
+        type: AUTHENTICATE_BITBUCKET
+    };
 };
 
 export const logout = () => {
-  return {
-    type: LOGOUT
-  };
+    return {
+        type: LOGOUT
+    };
 };
 
 export const toggleEditingProfile = () => {
-  return {
-    type: TOGGLE_EDIT_PROFILE
-  };
+    return {
+        type: TOGGLE_EDIT_PROFILE
+    };
 };
 
 export const toggleEditingRepo = () => {
-  return {
-    type: TOGGLE_EDIT_REPO
-  };
+    return {
+        type: TOGGLE_EDIT_REPO
+    };
 };
 

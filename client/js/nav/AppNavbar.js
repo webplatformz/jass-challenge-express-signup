@@ -1,9 +1,9 @@
 import React from 'react';
 
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 
-import { LinkContainer } from 'react-router-bootstrap';
-import { Link } from 'react-router';
+import {LinkContainer} from 'react-router-bootstrap';
+import {Link} from 'react-router';
 
 import Navbar from 'react-bootstrap/lib/Navbar';
 import NavbarHeader from 'react-bootstrap/lib/NavbarHeader';
@@ -14,35 +14,35 @@ import NavbarCollapse from 'react-bootstrap/lib/NavbarCollapse';
 import LoggedOutButtons from './LoggedOutButtons';
 import LoggedInButtons from './LoggedInButtons';
 
-const AppNavbar = ({ isTransparent, isAuthenticated }) => {
+const AppNavbar = ({isTransparent, isAuthenticated}) => {
 
-  const buttons = isAuthenticated ? <LoggedInButtons/> : <LoggedOutButtons/>;
+    const buttons = isAuthenticated ? <LoggedInButtons/> : <LoggedOutButtons/>;
 
-  return (
-    <Navbar fixedTop className={isTransparent ? 'transparent' : ''}>
-      <NavbarHeader>
-        <NavbarBrand>
-          <Link to="/">Jass-Challenge</Link>
-        </NavbarBrand>
-        <NavbarToggle />
-      </NavbarHeader>
-      <NavbarCollapse>
-        {buttons}
-      </NavbarCollapse>
-    </Navbar>
-  );
+    return (
+        <Navbar fixedTop className={isTransparent ? 'transparent' : ''}>
+            <NavbarHeader>
+                <NavbarBrand>
+                    <Link to="/">Jass-Challenge</Link>
+                </NavbarBrand>
+                <NavbarToggle />
+            </NavbarHeader>
+            <NavbarCollapse>
+                {buttons}
+            </NavbarCollapse>
+        </Navbar>
+    );
 };
 
 AppNavbar.propTypes = {
-  isTransparent: React.PropTypes.bool,
-  isAuthenticated: React.PropTypes.bool,
+    isTransparent: React.PropTypes.bool,
+    isAuthenticated: React.PropTypes.bool,
 };
 
 const mapStateToPros = (state) => ({
-  isAuthenticated: state.userReducer.isAuthenticated,
+    isAuthenticated: state.userReducer.isAuthenticated,
 });
 
 export default connect(
-  mapStateToPros,
-  {}
+    mapStateToPros,
+    {}
 )(AppNavbar);
