@@ -199,7 +199,7 @@ var port = process.env.PORT || config.get('port');
 app.listen(port);
 console.log(`application listening on port ${port}`);
 
-RedisClient.hgetAll('test', (err, data) => {
+RedisClient.hgetall('test', (err, data) => {
     console.log('******* get all: ' + data);
     
     done();
