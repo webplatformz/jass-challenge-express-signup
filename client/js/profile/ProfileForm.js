@@ -12,7 +12,8 @@ class ProfileForm extends Component {
             email: props.email,
             matrikel: props.matrikel,
             school: props.school,
-            degreeProgram: props.degreeProgram
+            degreeProgram: props.degreeProgram,
+            degree: props.degree
         };
 
         this.handleEmail = this.handleEmail.bind(this);
@@ -20,6 +21,7 @@ class ProfileForm extends Component {
         this.handleSchool = this.handleSchool.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleDegreeProgram = this.handleDegreeProgram.bind(this);
+        this.handleDegree = this.handleDegree.bind(this);
     };
 
     handleEmail(event) {
@@ -36,6 +38,10 @@ class ProfileForm extends Component {
 
     handleDegreeProgram(event) {
         this.setState({degreeProgram: event.target.value});
+    }
+
+    handleDegree(event) {
+        this.setState({degree: event.target.value});
     }
 
     handleSubmit() {
@@ -77,6 +83,15 @@ class ProfileForm extends Component {
                     </Col>
                     <Col sm={8}>
                         <input type="text" value={this.state.degreeProgram} onChange={this.handleDegreeProgram}
+                               placeholder="Degree Program"/>
+                    </Col>
+                </FormGroup>
+                <FormGroup controlId="formHorizontalDegree">
+                    <Col sm={2}>
+                        <label className="pull-right">Degree</label>
+                    </Col>
+                    <Col sm={8}>
+                        <input type="text" value={this.state.degree} onChange={this.handleDegree}
                                placeholder="Degree Program"/>
                     </Col>
                 </FormGroup>
