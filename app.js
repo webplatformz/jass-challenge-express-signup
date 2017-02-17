@@ -189,5 +189,6 @@ app.patch('/api/users', ensureAuthenticated, (req, res) => {
   });
 });
 
-app.listen(config.get('port'));
-console.log(`application listening on port ${config.get('port')}`);
+var port = process.env.PORT || config.get('port');
+app.listen(port);
+console.log(`application listening on port ${port}`);
