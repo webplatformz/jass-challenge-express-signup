@@ -54,6 +54,7 @@ const findCreateProfile = (username, provider, payload, done) => {
                 school: '',
                 degreeProgram: '',
                 degree: '',
+                fullname: '',
                 provider: provider,
                 profile: payload._raw
             };
@@ -186,9 +187,9 @@ app.patch('/api/users', ensureAuthenticated, (req, res) => {
 
     // profile to update is determined on user making request
     const username = req.user.username;
-    const {email, matrikel, school, degreeProgram, degree, gender} = req.body;
+    const {email, matrikel, school, degreeProgram, degree, gender, fullname} = req.body;
 
-    RedisClient.hmset(username, 'email', email, 'matrikel', matrikel, 'school', school, 'degreeProgram', degreeProgram, 'degree', degree, 'gender', gender, (err, reply) => {
+    RedisClient.hmset(username, 'email', email, 'matrikel', matrikel, 'school', school, 'degreeProgram', degreeProgram, 'degree', degree, 'gender', gender, 'fullname', fullname, (err, reply) => {
         if (err) {
             res.status(500).send('error updating profile');
         } else {

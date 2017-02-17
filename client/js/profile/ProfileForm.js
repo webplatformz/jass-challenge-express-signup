@@ -14,7 +14,8 @@ class ProfileForm extends Component {
             school: props.school,
             degreeProgram: props.degreeProgram,
             degree: props.degree,
-            gender: props.gender
+            gender: props.gender,
+            fullname : props.fullname
         };
 
         this.handleEmail = this.handleEmail.bind(this);
@@ -24,6 +25,7 @@ class ProfileForm extends Component {
         this.handleDegreeProgram = this.handleDegreeProgram.bind(this);
         this.handleDegree = this.handleDegree.bind(this);
         this.handleGender = this.handleGender.bind(this);
+        this.handleFullname = this.handleFullname.bind(this);
     };
 
     handleEmail(event) {
@@ -50,6 +52,10 @@ class ProfileForm extends Component {
         this.setState({gender: event.target.value});
     }
 
+    handleFullname(event) {
+        this.setState({fullname: event.target.value});
+    }
+
     handleSubmit() {
         this.props.onSubmitProfileData(this.state);
     }
@@ -57,6 +63,14 @@ class ProfileForm extends Component {
     render() {
         return (
             <Form horizontal>
+                <FormGroup controlId="formHorizontalFullname">
+                    <Col sm={2}>
+                        <label className="pull-right">Name</label>
+                    </Col>
+                    <Col sm={8}>
+                        <input type="text" value={this.state.fullname} onChange={this.handleFullname} placeholder="Name"/>
+                    </Col>
+                </FormGroup>
                 <FormGroup controlId="formHorizontalEmail">
                     <Col sm={2}>
                         <label className="pull-right">E-mail</label>
