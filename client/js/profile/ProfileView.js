@@ -3,7 +3,7 @@ import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {Form, FormGroup, Col,} from 'react-bootstrap';
 
-const ProfileView = ({user: {email, matrikel, school, degreeProgram, degree, profile: {url, avatar_url}}}) => {
+const ProfileView = ({user: {email, matrikel, school, degreeProgram, degree, gender, profile: {url, avatar_url}}}) => {
 
     return (
         <div>
@@ -15,6 +15,14 @@ const ProfileView = ({user: {email, matrikel, school, degreeProgram, degree, pro
                         </Col>
                         <Col sm={8}>
                             {email || 'missing information'}
+                        </Col>
+                    </FormGroup>
+                    <FormGroup controlId="formHorizontalGender">
+                        <Col sm={2}>
+                            <label className="pull-right">Gender</label>
+                        </Col>
+                        <Col sm={8}>
+                            {gender || 'missing information'}
                         </Col>
                     </FormGroup>
                     <FormGroup controlId="formHorizontalMatrikel">
