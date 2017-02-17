@@ -6,6 +6,6 @@
   "host": "localhost",
   "proxy": 3001,
   "port": 3000,
-  "redisHost": "localhost",
-  "redisPort": 6379
+  "redisHost": "redis://h:p2b0e5bf81a8243993d66dc4ab03373709c116fdfaa0671f06f84500928a3057e@ec2-34-249-143-159.eu-west-1.compute.amazonaws.com",
+  "redisPort": 26549
 }
