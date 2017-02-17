@@ -6,8 +6,7 @@ import {
     LOGOUT,
     TOGGLE_EDIT_PROFILE,
     UPDATE_PROFILE_CANCEL,
-    UPDATE_PROFILE_REQUEST,
-    TOGGLE_EDIT_REPO
+    UPDATE_PROFILE_REQUEST
 } from '../actions/index';
 
 const initialState = {
@@ -16,8 +15,7 @@ const initialState = {
         profile: {}
     },
     isEditingProfile: false,
-    isUpdatingProfile: false,
-    isEditingRepo: false,
+    isUpdatingProfile: false
 };
 
 export const userReducer = (state = initialState, action) => {
@@ -57,12 +55,6 @@ export const userReducer = (state = initialState, action) => {
         case UPDATE_PROFILE_CANCEL:
             return Object.assign({}, state, {
                 isEditingProfile: false,
-                isEditingRepo: false,
-            });
-
-        case TOGGLE_EDIT_REPO:
-            return Object.assign({}, state, {
-                isEditingRepo: !state.isEditingRepo
             });
 
         default:

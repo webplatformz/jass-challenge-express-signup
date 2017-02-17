@@ -7,10 +7,11 @@ import {connect} from 'react-redux';
 import ProfileForm from './ProfileForm';
 import ProfileView from './ProfileView';
 
-const ProfilePage = ({isEditingProfile, onToggleEditingProfile, user: {email, matrikel, school, degreeProgram, degree, gender}}) => {
+const ProfilePage = ({isEditingProfile, onToggleEditingProfile, user: {email, matrikel, school, degreeProgram, degree, gender, fullname, repo, academicyear}}) => {
 
     const profileComponent = isEditingProfile ?
-        <ProfileForm email={email} matrikel={matrikel} school={school} degreeProgram={degreeProgram} degree={degree} gender={gender}/> : <ProfileView/>;
+        <ProfileForm email={email} matrikel={matrikel} school={school} degreeProgram={degreeProgram} degree={degree}
+                     gender={gender} fullname={fullname} repo={repo} academicyear={academicyear}/> : <ProfileView/>;
     const editButton = isEditingProfile ? '' :
         <Button className="pull-right" onClick={onToggleEditingProfile}>Edit</Button>;
 
