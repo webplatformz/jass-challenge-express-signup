@@ -1,3 +1,6 @@
+# prod config
+config/production.json
+
 # build
 build
 
