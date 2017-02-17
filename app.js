@@ -45,7 +45,7 @@ const findCreateProfile = (username, provider, payload, done) => {
   RedisClient.hgetall(username, (err, stored) => {
     if (err) { throw err; }
 
-    // new profile if none found
+    console.log('user does not exist yet, creating a new one');
     if (!stored) {
       const creatable = {
         username: username,
@@ -58,9 +58,11 @@ const findCreateProfile = (username, provider, payload, done) => {
 
       RedisClient.hmset(username, creatable, (err /*, status */) => {
         if (err) { throw err; }
+        console.log('user successfully created');
         return done(null, creatable);
       });
     } else {
+      console.log('user already exists, not creating a new one');
       return done(null, stored);
     }
   });
