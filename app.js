@@ -41,6 +41,7 @@ const findCreateProfile = (username, provider, payload, done) => {
   // find or create user profile
   console.log(`**** checking if user already exists: ${username}`);
   console.log(`**** redis host: ${config.get('redisHost')}`);
+  console.log(`**** redis port: ${config.get('redisPort')}`);
   RedisClient.hgetall(username, (err, stored) => {
     if (err) { throw err; }
 
