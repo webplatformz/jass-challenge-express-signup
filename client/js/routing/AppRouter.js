@@ -6,7 +6,6 @@ import LandingPage from '../landing/LandingPage';
 import LandingLayout from '../landing/LandingLayout';
 import LoginPage from '../login/LoginPage';
 import SignupPage from '../signup/SignupPage';
-import ReposPage from '../repo/ReposPage';
 import ProfilePage from '../profile/ProfilePage';
 
 const AppRouter = ({isAuthenticated}) => {
@@ -25,7 +24,6 @@ const AppRouter = ({isAuthenticated}) => {
             <Route component={Layout}>
                 <Route path="login" component={LoginPage}></Route>
                 <Route path="signup" component={SignupPage}></Route>
-                <Route path="repos" component={ReposPage} /*onEnter={requireAuth}*/></Route>
                 <Route path="profile" component={ProfilePage} /*onEnter={requireAuth}*/></Route>
             </Route>
         </Router>

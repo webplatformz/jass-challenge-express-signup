@@ -17,9 +17,6 @@ const LoggedInButtons = ({onLogoutClick}) => {
                 <LinkContainer to={'/profile'}>
                     <NavItem>My Profile</NavItem>
                 </LinkContainer>
-                <LinkContainer to={'/repos'}>
-                    <NavItem>My Repo</NavItem>
-                </LinkContainer>
                 <LinkContainer to={'/#'} onClick={onLogoutClick}>
                     <NavItem>Logout</NavItem>
                 </LinkContainer>
