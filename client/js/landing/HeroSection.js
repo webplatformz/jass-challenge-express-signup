@@ -1,9 +1,12 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 
 import {Col, Row, Button} from 'react-bootstrap';
 import {LinkContainer} from 'react-router-bootstrap';
+import {connect} from "react-redux";
 
-const HeroSection = () => {
+import {authenticateGithub, authenticateBitbucket} from '../redux/actions/index';
+
+const HeroSection = ({onAuthenticateGithubClick, onAuthenticateBitbucketClick}) => {
     return (
         <div>
             <a name="about"></a>
@@ -15,9 +18,8 @@ const HeroSection = () => {
                                 <h1>Jass-Challenge</h1>
                                 <h3>Description of Jass-Challenge</h3>
                                 <hr className="intro-divider"/>
-                                <LinkContainer to="/signup">
-                                    <Button className="transparent">Sign Up Here</Button>
-                                </LinkContainer>
+                                <Button className="transparent" onClick={onAuthenticateGithubClick}>Login with Github</Button>
+                                <Button className="transparent" onClick={onAuthenticateBitbucketClick}>Login with Bitbucket</Button>
                                 <Button href={'/#about'} className="transparent">More Information</Button>
                             </div>
                         </Col>
@@ -28,4 +30,12 @@ const HeroSection = () => {
     );
 };
 
-export default HeroSection;
+HeroSection.propTypes = {
+  onAuthenticateGithubClick: PropTypes.func,
+  onAuthenticateBitbucketClick: PropTypes.func,
+};
+
+export default connect(
+  state => ({}),
+  {onAuthenticateGithubClick: authenticateGithub, onAuthenticateBitbucketClick: authenticateBitbucket}
+)(HeroSection);
