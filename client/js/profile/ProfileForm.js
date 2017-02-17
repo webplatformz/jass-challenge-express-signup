@@ -15,7 +15,8 @@ class ProfileForm extends Component {
             degreeProgram: props.degreeProgram,
             degree: props.degree,
             gender: props.gender,
-            fullname : props.fullname
+            fullname: props.fullname,
+            repo: props.repo
         };
 
         this.handleEmail = this.handleEmail.bind(this);
@@ -26,6 +27,7 @@ class ProfileForm extends Component {
         this.handleDegree = this.handleDegree.bind(this);
         this.handleGender = this.handleGender.bind(this);
         this.handleFullname = this.handleFullname.bind(this);
+        this.handleRepo = this.handleRepo.bind(this);
     };
 
     handleEmail(event) {
@@ -56,6 +58,10 @@ class ProfileForm extends Component {
         this.setState({fullname: event.target.value});
     }
 
+    handleRepo(event) {
+        this.setState({repo: event.target.value});
+    }
+
     handleSubmit() {
         this.props.onSubmitProfileData(this.state);
     }
@@ -68,7 +74,16 @@ class ProfileForm extends Component {
                         <label className="pull-right">Name</label>
                     </Col>
                     <Col sm={8}>
-                        <input type="text" value={this.state.fullname} onChange={this.handleFullname} placeholder="Name"/>
+                        <input type="text" value={this.state.fullname} onChange={this.handleFullname}
+                               placeholder="Name"/>
+                    </Col>
+                </FormGroup>
+                <FormGroup controlId="formHorizontalRepo">
+                    <Col sm={2}>
+                        <label className="pull-right">Repository</label>
+                    </Col>
+                    <Col sm={8}>
+                        <input type="text" value={this.state.repo} onChange={this.handleRepo} placeholder="Repo"/>
                     </Col>
                 </FormGroup>
                 <FormGroup controlId="formHorizontalEmail">
