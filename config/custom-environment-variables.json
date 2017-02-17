@@ -2,5 +2,8 @@
   "githubKey": "JASS_CHALLENGE_GITHUB_KEY",
   "githubSecret": "JASS_CHALLENGE_GITHUB_SECRET",
   "bitbucketKey": "JASS_CHALLENGE_BITBUCKET_KEY",
-  "bitbucketSecret": "JASS_CHALLENGE_BITBUCKET_SECRET"
+  "bitbucketSecret": "JASS_CHALLENGE_BITBUCKET_SECRET",
+  "host": "HOST",
+  "redisHost": "REDIS_HOST",
+  "redisPort": "REDIS_PORT"
 }

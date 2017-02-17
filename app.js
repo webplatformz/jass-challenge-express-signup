@@ -92,15 +92,15 @@ passport.use(new GithubStrategy({
  * configure passport to use bitbucket strategy
  */
 passport.use(new BitbucketStrategy({
-        clientID: BITBUCKET_KEY,
-        clientSecret: BITBUCKET_SECRET,
-        callbackURL: `http://${config.get('host')}:${config.get('proxy')}/api/auth/bitbucket/callback`
-    },
-    (token, tokenSecret, bitbucketProfile, done) => {
-        const provider = 'bitbucket';
-        const username = bitbucketProfile.username;
-        findCreateProfile(username, provider, bitbucketProfile, done);
-    }
+    clientID: BITBUCKET_KEY,
+    clientSecret: BITBUCKET_SECRET,
+    callbackURL: `https://${config.get('host')}/api/auth/bitbucket/callback`
+  },
+  (token, tokenSecret, bitbucketProfile, done) => {
+    const provider = 'bitbucket';
+    const username = bitbucketProfile.username;
+    findCreateProfile(username, provider, bitbucketProfile, done);
+  }
 ));
 
 // setup express app
@@ -201,5 +201,14 @@ app.patch('/api/users', ensureAuthenticated, (req, res) => {
     });
 });
 
-app.listen(config.get('port'));
-console.log(`application listening on port ${config.get('port')}`);
+var port = process.env.PORT || config.get('port');
+app.listen(port);
+console.log(`application listening on port ${port}`);
+
+RedisClient.set('hello', 'hello', (err, res) => {
+    if (err) {
+      console.log(`**** error from set ${res}`);
+    } else {
+      console.log(`**** success from set ${res}`);
+    }
+});

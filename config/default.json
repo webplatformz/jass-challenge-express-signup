@@ -6,6 +6,6 @@
   "host": "localhost",
   "proxy": 3001,
   "port": 3000,
-  "redisHost": "localhost",
-  "redisPort": 6379
+  "redisHost": "",
+  "redisPort": 26549
 }
