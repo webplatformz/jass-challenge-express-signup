@@ -16,6 +16,7 @@ class ProfileForm extends Component {
             degree: props.degree,
             gender: props.gender,
             fullname: props.fullname,
+            academicyear: props.academicyear,
             repo: props.repo
         };
 
@@ -28,6 +29,7 @@ class ProfileForm extends Component {
         this.handleGender = this.handleGender.bind(this);
         this.handleFullname = this.handleFullname.bind(this);
         this.handleRepo = this.handleRepo.bind(this);
+        this.handleAcademicyear = this.handleAcademicyear.bind(this);
     };
 
     handleEmail(event) {
@@ -60,6 +62,10 @@ class ProfileForm extends Component {
 
     handleRepo(event) {
         this.setState({repo: event.target.value});
+    }
+
+    handleAcademicyear(event) {
+        this.setState({academicyear: event.target.value});
     }
 
     handleSubmit() {
@@ -138,6 +144,16 @@ class ProfileForm extends Component {
                                placeholder="Degree Program"/>
                     </Col>
                 </FormGroup>
+                <FormGroup controlId="formHorizontalAcademicyear">
+                    <Col sm={2}>
+                        <label className="pull-right">Academic Year</label>
+                    </Col>
+                    <Col sm={8}>
+                        <input type="text" value={this.state.academicyear} onChange={this.handleAcademicyear}
+                               placeholder="Academic Year"/>
+                    </Col>
+                </FormGroup>
+
                 <FormGroup>
                     <Col smOffset={2} sm={8}>
                         <Button className="pull-right" onClick={this.handleSubmit}>Submit</Button>
