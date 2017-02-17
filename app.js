@@ -84,7 +84,7 @@ passport.use(new GithubStrategy({
 passport.use(new BitbucketStrategy({
     clientID: BITBUCKET_KEY,
     clientSecret: BITBUCKET_SECRET,
-    callbackURL: `http://${config.get('host')}:${config.get('proxy')}/api/auth/bitbucket/callback`
+    callbackURL: `http://${config.get('host')}/api/auth/bitbucket/callback`
   },
   (token, tokenSecret, bitbucketProfile, done) => {
     const provider = 'bitbucket';
