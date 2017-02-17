@@ -83,7 +83,7 @@ class ProfileForm extends Component {
                         <label className="pull-right">Repository</label>
                     </Col>
                     <Col sm={8}>
-                        <input type="text" value={this.state.repo} onChange={this.handleRepo} placeholder="Repo"/>
+                        <input type="url" value={this.state.repo} onChange={this.handleRepo} placeholder="Repo"/>
                     </Col>
                 </FormGroup>
                 <FormGroup controlId="formHorizontalEmail">
