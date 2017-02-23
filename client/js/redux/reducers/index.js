@@ -1,4 +1,5 @@
 import {combineReducers} from 'redux';
+import {reducer as formReducer} from 'redux-form';
 import {
     LOGIN_SUCCESS,
     AUTHENTICATE_GITHUB,
@@ -63,5 +64,6 @@ export const userReducer = (state = initialState, action) => {
 };
 
 export default combineReducers({
-    userReducer
+    form: formReducer,
+    userReducer: userReducer,
 });

@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 
 import {connect} from 'react-redux';
-import {Form, FormGroup, Col,} from 'react-bootstrap';
+import {Form, FormGroup, Col, FormControl, ControlLabel, } from 'react-bootstrap';
 
 const ProfileView = ({user: {email, matrikel, school, degreeProgram, degree, gender, fullname, repo, academicyear, profile: {url, avatar_url}}}) => {
 
@@ -11,74 +11,74 @@ const ProfileView = ({user: {email, matrikel, school, degreeProgram, degree, gen
                 <Form horizontal>
                     <FormGroup controlId="formHorizontalFullname">
                         <Col sm={2}>
-                            <label className="pull-right">Name</label>
+                            <ControlLabel className="pull-right">Name</ControlLabel>
                         </Col>
                         <Col sm={8}>
-                            {fullname || 'missing information'}
+                            <FormControl disabled value={fullname || 'missing information'}></FormControl>
                         </Col>
                     </FormGroup>
                     <FormGroup controlId="formHorizontalRepo">
                         <Col sm={2}>
-                            <label className="pull-right">Repo</label>
+                            <ControlLabel className="pull-right">Repo</ControlLabel>
                         </Col>
                         <Col sm={8}>
-                            {repo || 'missing information'}
+                            <FormControl disabled value={repo || 'missing information'}></FormControl>
                         </Col>
                     </FormGroup>
                     <FormGroup controlId="formHorizontalEmail">
                         <Col sm={2}>
-                            <label className="pull-right">E-mail</label>
+                            <ControlLabel className="pull-right">E-mail</ControlLabel>
                         </Col>
                         <Col sm={8}>
-                            {email || 'missing information'}
+                            <FormControl disabled value={email || 'missing information'}></FormControl>
                         </Col>
                     </FormGroup>
                     <FormGroup controlId="formHorizontalGender">
                         <Col sm={2}>
-                            <label className="pull-right">Gender</label>
+                            <ControlLabel className="pull-right">Gender</ControlLabel>
                         </Col>
                         <Col sm={8}>
-                            {gender || 'missing information'}
+                            <FormControl disabled value={gender || 'missing information'}></FormControl>
                         </Col>
                     </FormGroup>
                     <FormGroup controlId="formHorizontalMatrikel">
                         <Col sm={2}>
-                            <label className="pull-right">Matrikel Number</label>
+                            <ControlLabel className="pull-right">Matrikel Number</ControlLabel>
                         </Col>
                         <Col sm={8}>
-                            {matrikel || 'missing information'}
+                            <FormControl disabled value={matrikel || 'missing information'}></FormControl>
                         </Col>
                     </FormGroup>
                     <FormGroup controlId="formHorizontalSchool">
                         <Col sm={2}>
-                            <label className="pull-right">School</label>
+                            <ControlLabel className="pull-right">School</ControlLabel>
                         </Col>
                         <Col sm={8}>
-                            {school || 'missing information'}
+                            <FormControl disabled value={school || 'missing information'}></FormControl>
                         </Col>
                     </FormGroup>
                     <FormGroup controlId="formHorizontalDegreeProgram">
                         <Col sm={2}>
-                            <label className="pull-right">Degree Program</label>
+                            <ControlLabel className="pull-right">Degree Program</ControlLabel>
                         </Col>
                         <Col sm={8}>
-                            {degreeProgram || 'missing information'}
+                            <FormControl disabled value={degreeProgram || 'missing information'}></FormControl>
                         </Col>
                     </FormGroup>
                     <FormGroup controlId="formHorizontalDegree">
                         <Col sm={2}>
-                            <label className="pull-right">Degree</label>
+                            <ControlLabel className="pull-right">Degree</ControlLabel>
                         </Col>
                         <Col sm={8}>
-                            {degree || 'missing information'}
+                            <FormControl disabled value={degree || 'missing information'}></FormControl>
                         </Col>
                     </FormGroup>
                     <FormGroup controlId="formHorizontalAcademicYear">
                         <Col sm={2}>
-                            <label className="pull-right">Academic Year</label>
+                            <ControlLabel className="pull-right">Academic Year</ControlLabel>
                         </Col>
                         <Col sm={8}>
-                            {academicyear || 'missing information'}
+                            <FormControl disabled value={academicyear || 'missing information'}></FormControl>
                         </Col>
                     </FormGroup>
                 </Form>

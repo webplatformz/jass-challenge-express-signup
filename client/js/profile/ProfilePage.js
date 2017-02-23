@@ -1,17 +1,22 @@
 import React, {PropTypes} from 'react';
 
 import {Button, Form, FormGroup, FormControl, Col, ControlLabel,} from 'react-bootstrap';
-import {toggleEditingProfile} from '../redux/actions/index';
+import {toggleEditingProfile, updateProfile} from '../redux/actions/index';
 import {connect} from 'react-redux';
 
 import ProfileForm from './ProfileForm';
 import ProfileView from './ProfileView';
 
-const ProfilePage = ({isEditingProfile, onToggleEditingProfile, user: {email, matrikel, school, degreeProgram, degree, gender, fullname, repo, academicyear}}) => {
+const ProfilePage = ({isEditingProfile, onSubmitProfileData , onToggleEditingProfile, user: {email, matrikel, school, degreeProgram, degree, gender, fullname, repo, academicyear}}) => {
+
+    const handleSubmit = (values) => {
+      onSubmitProfileData(values);
+    };
+
+    const initialFormValues = { email, matrikel, school, degreeProgram, degree, gender, fullname, repo, academicyear };
 
     const profileComponent = isEditingProfile ?
-        <ProfileForm email={email} matrikel={matrikel} school={school} degreeProgram={degreeProgram} degree={degree}
-                     gender={gender} fullname={fullname} repo={repo} academicyear={academicyear}/> : <ProfileView/>;
+        <ProfileForm onCancel={onToggleEditingProfile} onSubmit={handleSubmit} initialValues={initialFormValues}/> : <ProfileView/>;
     const editButton = isEditingProfile ? '' :
         <Button className="pull-right" onClick={onToggleEditingProfile}>Edit</Button>;
 
@@ -44,5 +49,5 @@ const mapStateToPros = (state) => ({
 
 export default connect(
     mapStateToPros,
-    {onToggleEditingProfile: toggleEditingProfile}
+    {onToggleEditingProfile: toggleEditingProfile, onSubmitProfileData: updateProfile()}
 )(ProfilePage);

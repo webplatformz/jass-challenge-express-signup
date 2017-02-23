@@ -20,7 +20,8 @@ const HeroSection = ({onAuthenticateGithubClick, onAuthenticateBitbucketClick}) 
                                 <hr className="intro-divider"/>
                                 <Button className="transparent" onClick={onAuthenticateGithubClick}>Login with Github</Button>
                                 <Button className="transparent" onClick={onAuthenticateBitbucketClick}>Login with Bitbucket</Button>
-                                <Button href={'/#about'} className="transparent">More Information</Button>
+                                <br/>
+                                <Button href={'/#about'} bsSize="large" className="transparent no-border">Learn More</Button>
                             </div>
                         </Col>
                     </Row>
