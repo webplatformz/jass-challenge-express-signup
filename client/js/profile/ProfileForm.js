@@ -5,6 +5,7 @@ import {Button, Form, FormGroup, FormControl, Col, ControlLabel,} from 'react-bo
 import {connect} from 'react-redux';
 
 const required = value => value && value.length >= 3 ? undefined: 'Required, must be at least 3 characters.';
+const requiredNumber = value => value && value.length >= 1 ? undefined: 'Required, must be at least 1 characters.';
 
 const renderField = ({ input, label, type, meta: { touched, error, warning } }) => (
   <FormGroup validationState={(touched && error) ? 'error' : null}>
@@ -57,7 +58,7 @@ const ProfileForm = ({onCancel, handleSubmit}) => {
         />
         <Field name="academicyear" type="text"
                component={renderField} label="Academic Year"
-               validate={[required]}
+               validate={[requiredNumber]}
         />
         <FormGroup>
             <Col smOffset={2} sm={8}>

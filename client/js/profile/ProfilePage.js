@@ -49,5 +49,5 @@ const mapStateToPros = (state) => ({
 
 export default connect(
     mapStateToPros,
-    {onToggleEditingProfile: toggleEditingProfile, onSubmitProfileData: updateProfile()}
+    {onToggleEditingProfile: toggleEditingProfile, onSubmitProfileData: updateProfile}
 )(ProfilePage);
