@@ -79,7 +79,7 @@ const findCreateProfile = (username, provider, payload, done) => {
 passport.use(new GithubStrategy({
         clientID: GITHUB_KEY,
         clientSecret: GITHUB_SECRET,
-        callbackURL: `http://${config.get('host')}:${config.get('proxy')}/api/auth/github/callback`
+        callbackURL: config.get('githubCallbackUrl')
     },
     (accesstoken, refreshtoken, githubProfile, done) => {
         const provider = 'github';
@@ -94,7 +94,7 @@ passport.use(new GithubStrategy({
 passport.use(new BitbucketStrategy({
     clientID: BITBUCKET_KEY,
     clientSecret: BITBUCKET_SECRET,
-    callbackURL: `https://${config.get('host')}/api/auth/bitbucket/callback`
+    callbackURL: config.get('bitbucketCallbackUrl')
   },
   (token, tokenSecret, bitbucketProfile, done) => {
     const provider = 'bitbucket';

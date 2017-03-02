@@ -4,6 +4,5 @@
   "bitbucketKey": "JASS_CHALLENGE_BITBUCKET_KEY",
   "bitbucketSecret": "JASS_CHALLENGE_BITBUCKET_SECRET",
   "host": "HOST",
-  "redisHost": "REDIS_HOST",
-  "redisPort": "REDIS_PORT"
+  "redisUrl": "REDIS_URL"
 }

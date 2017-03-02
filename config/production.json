@@ -1,0 +1,4 @@
+{
+  "githubCallbackUrl": "https://jass-challenge.herokuapp.com/api/auth/github/callback",
+  "bitbucketCallbackUrl": "https://jass-challenge.herokuapp.com/api/auth/bitbucket/callback"
+}
