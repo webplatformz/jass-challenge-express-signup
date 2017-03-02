@@ -1,10 +1,4 @@
 {
-  "githubKey": "",
-  "githubSecret": "",
-  "bitbucketKey": "",
-  "bitbucketSecret": "",
-  "host": "127.0.0.1",
-  "port": 55555,
   "githubCallbackUrl": "https://jass-challenge.herokuapp.com/api/auth/github/callback",
   "bitbucketCallbackUrl": "https://jass-challenge.herokuapp.com/api/auth/bitbucket/callback"
 }
