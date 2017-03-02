@@ -9,5 +9,6 @@
   "githubCallbackUrl": "localhost:3001/auth/github/callback",
   "bitbucketCallbackUrl": "localhost:3001/auth/bitbucket/callback",
   "redisHost": "",
-  "redisPort": 26549
+  "redisPort": 26549,
+  "redisUrl": ""
 }
