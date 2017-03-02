@@ -203,12 +203,4 @@ app.patch('/api/users', ensureAuthenticated, (req, res) => {
 
 var port = process.env.PORT || config.get('port');
 app.listen(port);
-console.log(`application listening on port ${port}`);
-
-RedisClient.set('hello', 'hello', (err, res) => {
-    if (err) {
-      console.log(`**** error from set ${res}`);
-    } else {
-      console.log(`**** success from set ${res}`);
-    }
-});
+console.info(`application listening on port ${port}`);

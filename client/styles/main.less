@@ -207,6 +207,26 @@ p.copyright {
   border-radius: 0 !important;
 }
 
+.social-login-button-container {
+  display: flex;
+  justify-content: center;
+}
+
+.social-login-button {
+  display: flex;
+  align-items: center;
+
+  svg {
+    width: 16px;
+    height: 16px;
+    margin-right: 8px;
+  }
+
+  &:not(:hover) svg path {
+    fill: white;
+  }
+}
+
 .form-well {
   margin-top: 100px;
   margin-bottom: 100px;

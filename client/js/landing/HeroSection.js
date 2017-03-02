@@ -1,42 +1,55 @@
-import React, {PropTypes} from 'react';
+import React, { PropTypes } from 'react';
+import { Col, Row, Button } from 'react-bootstrap';
+import { connect } from "react-redux";
+import { authenticateGithub, authenticateBitbucket } from '../redux/actions/index';
+import GithubImage from '../../images/github.svg';
+import BitbucketImage from '../../images/bitbucket.svg';
 
-import {Col, Row, Button} from 'react-bootstrap';
-import {LinkContainer} from 'react-router-bootstrap';
-import {connect} from "react-redux";
 
-import {authenticateGithub, authenticateBitbucket} from '../redux/actions/index';
-
-const HeroSection = ({onAuthenticateGithubClick, onAuthenticateBitbucketClick}) => {
-    return (
-        <div>
-            <a name="about"></a>
-            <div className="intro-header">
-                <div className="container">
-                    <Row>
-                        <Col lg={12}>
-                            <div className="intro-message">
-                                <h1>Jass-Challenge</h1>
-                                <h3>Description of Jass-Challenge</h3>
-                                <hr className="intro-divider"/>
-                                <Button className="transparent" onClick={onAuthenticateGithubClick}>Login with Github</Button>
-                                <Button className="transparent" onClick={onAuthenticateBitbucketClick}>Login with Bitbucket</Button>
-                                <br/>
-                                <Button href={'/#about'} bsSize="large" className="transparent no-border">Learn More</Button>
+const HeroSection = ({ onAuthenticateGithubClick, onAuthenticateBitbucketClick }) => (
+    <div>
+        <a name="about"></a>
+        <div className="intro-header">
+            <div className="container">
+                <Row>
+                    <Col lg={12}>
+                        <div className="intro-message">
+                            <h1>Jass-Challenge</h1>
+                            <h3>Description of Jass-Challenge</h3>
+                            <hr className="intro-divider" />
+                            <div className="social-login-button-container">
+                                <Button
+                                    className="transparent social-login-button"
+                                    onClick={onAuthenticateGithubClick}
+                                >
+                                    <GithubImage />
+                                    Login with Github
+                                </Button>
+                                <Button
+                                    className="transparent social-login-button"
+                                    onClick={onAuthenticateBitbucketClick}
+                                >
+                                    <BitbucketImage />
+                                    Login with Bitbucket
+                                </Button>
                             </div>
-                        </Col>
-                    </Row>
-                </div>
+                            <Button href={'/#about'} bsSize="large" className="transparent no-border">
+                                Learn More
+                            </Button>
+                        </div>
+                    </Col>
+                </Row>
             </div>
         </div>
-    );
-};
+    </div>
+);
 
 HeroSection.propTypes = {
-  onAuthenticateGithubClick: PropTypes.func,
-  onAuthenticateBitbucketClick: PropTypes.func,
+    onAuthenticateGithubClick: PropTypes.func,
+    onAuthenticateBitbucketClick: PropTypes.func,
 };
 
 export default connect(
-  state => ({}),
-  {onAuthenticateGithubClick: authenticateGithub, onAuthenticateBitbucketClick: authenticateBitbucket}
+    state => ({}),
+    { onAuthenticateGithubClick: authenticateGithub, onAuthenticateBitbucketClick: authenticateBitbucket }
 )(HeroSection);
