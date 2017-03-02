@@ -1,9 +1,9 @@
-import React, {Component, PropTypes} from 'react';
+import React, { Component, PropTypes } from 'react';
 
-import {connect} from 'react-redux';
-import {Form, FormGroup, Col, FormControl, ControlLabel, } from 'react-bootstrap';
+import { connect } from 'react-redux';
+import { Form, FormGroup, Col, FormControl, ControlLabel, } from 'react-bootstrap';
 
-const ProfileView = ({user: {email, matrikel, school, degreeProgram, degree, gender, fullname, repo, academicyear, profile: {url, avatar_url}}}) => {
+const ProfileView = ({ user: { email, matrikel, school, degreeProgram, degree, gender, fullname, repo, academicyear, profile: { url, avatar_url } } }) => {
 
     return (
         <div>
@@ -84,7 +84,7 @@ const ProfileView = ({user: {email, matrikel, school, degreeProgram, degree, gen
                 </Form>
             </Col>
             <Col sm={3}>
-                <img src={avatar_url} alt=""/>
+                <img className="profile-avatar" src={avatar_url} alt="" />
             </Col>
         </div>
     );
