@@ -6,9 +6,7 @@
   "host": "localhost",
   "proxy": 3001,
   "port": 3000,
-  "githubCallbackUrl": "localhost:3001/auth/github/callback",
-  "bitbucketCallbackUrl": "localhost:3001/auth/bitbucket/callback",
-  "redisHost": "",
-  "redisPort": 26549,
-  "redisUrl": ""
+  "githubCallbackUrl": "http://localhost:3001/api/auth/github/callback",
+  "bitbucketCallbackUrl": "http://localhost:3001/api/auth/bitbucket/callback",
+  "redisUrl": "redis://localhost:6379"
 }
