@@ -14,8 +14,8 @@ const HeroSection = ({ onAuthenticateGithubClick, onAuthenticateBitbucketClick }
                 <Row>
                     <Col lg={12}>
                         <div className="intro-message">
-                            <h1>Jass-Challenge</h1>
-                            <h3>Description of Jass-Challenge</h3>
+                            <h1>Zühlke Jass-Challenge 2017</h1>
+                            <h3>Create your own Jass-Bot and compete with others</h3>
                             <hr className="intro-divider" />
                             <div className="social-login-button-container">
                                 <Button
