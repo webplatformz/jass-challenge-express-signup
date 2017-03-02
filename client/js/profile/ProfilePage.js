@@ -1,22 +1,35 @@
-import React, {PropTypes} from 'react';
-
-import {Button, Form, FormGroup, FormControl, Col, ControlLabel,} from 'react-bootstrap';
-import {toggleEditingProfile, updateProfile} from '../redux/actions/index';
-import {connect} from 'react-redux';
-
+import React, { PropTypes } from 'react';
+import { Button } from 'react-bootstrap';
+import { connect } from 'react-redux';
+import { toggleEditingProfile, updateProfile } from '../redux/actions/index';
 import ProfileForm from './ProfileForm';
 import ProfileView from './ProfileView';
 
-const ProfilePage = ({isEditingProfile, onSubmitProfileData , onToggleEditingProfile, user: {email, matrikel, school, degreeProgram, degree, gender, fullname, repo, academicyear}}) => {
-
+const ProfilePage = ({
+    isEditingProfile,
+    onSubmitProfileData,
+    onToggleEditingProfile,
+    user: {
+        email,
+        matrikel,
+        school,
+        degreeProgram,
+        degree,
+        gender,
+        fullname,
+        repo,
+        academicyear
+    }
+}) => {
     const handleSubmit = (values) => {
-      onSubmitProfileData(values);
+        onSubmitProfileData(values);
     };
 
     const initialFormValues = { email, matrikel, school, degreeProgram, degree, gender, fullname, repo, academicyear };
 
     const profileComponent = isEditingProfile ?
-        <ProfileForm onCancel={onToggleEditingProfile} onSubmit={handleSubmit} initialValues={initialFormValues}/> : <ProfileView/>;
+        <ProfileForm onCancel={onToggleEditingProfile} onSubmit={handleSubmit} initialValues={initialFormValues} /> :
+        <ProfileView />;
     const editButton = isEditingProfile ? '' :
         <Button className="pull-right" onClick={onToggleEditingProfile}>Edit</Button>;
 
@@ -28,7 +41,7 @@ const ProfilePage = ({isEditingProfile, onSubmitProfileData , onToggleEditingPro
                         My Profile
                         {editButton}
                     </h3>
-                    <hr/>
+                    <hr />
                     {profileComponent}
                 </div>
             </div>
@@ -42,12 +55,13 @@ ProfilePage.propTypes = {
     user: PropTypes.object,
 };
 
-const mapStateToPros = (state) => ({
-    isEditingProfile: state.userReducer.isEditingProfile,
-    user: state.userReducer.user,
-});
-
 export default connect(
-    mapStateToPros,
-    {onToggleEditingProfile: toggleEditingProfile, onSubmitProfileData: updateProfile}
+    state => ({
+        isEditingProfile: state.userReducer.isEditingProfile,
+        user: state.userReducer.user,
+    }),
+    {
+        onToggleEditingProfile: toggleEditingProfile,
+        onSubmitProfileData: updateProfile
+    }
 )(ProfilePage);
