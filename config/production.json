@@ -7,6 +7,4 @@
   "port": 55555,
   "githubCallbackUrl": "https://jass-challenge.herokuapp.com/api/auth/github/callback",
   "bitbucketCallbackUrl": "https://jass-challenge.herokuapp.com/api/auth/bitbucket/callback",
-  "redisHost": "localhost",
-  "redisPort": 6379
 }
