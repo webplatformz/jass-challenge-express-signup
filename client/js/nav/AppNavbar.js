@@ -39,7 +39,7 @@ AppNavbar.propTypes = {
 };
 
 const mapStateToPros = (state) => ({
-    isAuthenticated: state.userReducer.isAuthenticated,
+    isAuthenticated: state.user.isAuthenticated,
 });
 
 export default connect(

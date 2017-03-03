@@ -1,8 +1,7 @@
-import React, {Component, PropTypes} from 'react';
+import React, { Component, PropTypes } from 'react';
 import AppRouter from './routing/AppRouter';
-import UserContainer from './redux/containers/UserContainer';
-import {connect} from 'react-redux';
-import {authenticateGithub, authenticateBitbucket, logout, checkAuth} from './redux/actions';
+import { connect } from 'react-redux';
+import { authenticateGithub, authenticateBitbucket, logout, checkAuth } from './redux/actions';
 
 class App extends Component {
 
@@ -12,7 +11,7 @@ class App extends Component {
 
     render() {
         return (
-            <AppRouter isAuthenticated={this.props.isAuthenticated}/>
+            <AppRouter isAuthenticated={this.props.isAuthenticated} />
         );
     }
 }
@@ -26,13 +25,11 @@ App.propTypes = {
     onLogoutClick: PropTypes.func
 };
 
-const mapStateToProps = (state) => ({
-    isAuthenticated: state.userReducer.isAuthenticated,
-    user: state.userReducer.user
-});
-
 export default connect(
-    mapStateToProps,
+    state => ({
+        isAuthenticated: state.user.isAuthenticated,
+        user: state.user.user
+    }),
     {
         onAuthenticateGithubClick: authenticateGithub,
         onAuthenticateBitbucketClick: authenticateBitbucket,

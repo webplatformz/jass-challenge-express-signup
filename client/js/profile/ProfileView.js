@@ -108,7 +108,7 @@ ProfileView.propTypes = {
 
 export default connect(
     state => ({
-        user: state.userReducer.user
+        user: state.user.user
     }),
     {}
 )(ProfileView);

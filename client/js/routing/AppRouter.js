@@ -10,7 +10,7 @@ const AppRouter = ({isAuthenticated}) => {
 
     const requireAuth = (nextState, replace) => {
         if (!isAuthenticated) {
-            replace({pathname: '/login'});
+            replace({pathname: '/'});
         }
     };
 

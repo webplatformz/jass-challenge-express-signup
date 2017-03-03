@@ -57,8 +57,8 @@ ProfilePage.propTypes = {
 
 export default connect(
     state => ({
-        isEditingProfile: state.userReducer.isEditingProfile,
-        user: state.userReducer.user,
+        isEditingProfile: state.user.isEditingProfile,
+        user: state.user.user,
     }),
     {
         onToggleEditingProfile: toggleEditingProfile,
