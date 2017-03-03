@@ -10,9 +10,13 @@ class App extends Component {
     }
 
     render() {
-        return (
-            <AppRouter isAuthenticated={this.props.isAuthenticated} />
-        );
+        if (this.props.authenticationChecked) {
+            return (
+                <AppRouter isAuthenticated={this.props.isAuthenticated} />
+            );
+        }
+
+        return <div />; // TODO should we display something to guide users if auth checking fails?
     }
 }
 
@@ -26,10 +30,7 @@ App.propTypes = {
 };
 
 export default connect(
-    state => ({
-        isAuthenticated: state.user.isAuthenticated,
-        user: state.user.user
-    }),
+    state => state.user,
     {
         onAuthenticateGithubClick: authenticateGithub,
         onAuthenticateBitbucketClick: authenticateBitbucket,

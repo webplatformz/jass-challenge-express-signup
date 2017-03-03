@@ -9,6 +9,7 @@ import {
 } from '../actions';
 
 const initialState = {
+    authenticationChecked: false,
     isAuthenticated: false,
     user: {
         profile: {}
@@ -19,14 +20,12 @@ const initialState = {
 
 export default (state = initialState, action) => {
     switch (action.type) {
-
         case LOGIN_SUCCESS:
-            console.log(action);
             return Object.assign({}, state, {
+                authenticationChecked: true,
                 isAuthenticated: action.isAuthenticated,
                 user: action.user
             });
-
         case AUTHENTICATE_GITHUB:
             history.pushState({}, "github auth", "/api/auth/github");
             window.location = "/api/auth/github";
