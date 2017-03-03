@@ -138,12 +138,12 @@ app.get('/api/auth/user', (req, res) => {
 /**
  * authenticate with github
  */
-app.get('/api/auth/github', passport.authenticate('github'), (/*req, res */) => { /* redirects to github */ });
+app.get('/api/auth/github', passport.authenticate('github'));
 
 /**
  * authenticate with bitbucket
  */
-app.get('/api/auth/bitbucket', passport.authenticate('bitbucket'), (/*req, res */) => { /* redirects to bitbucket */ });
+app.get('/api/auth/bitbucket', passport.authenticate('bitbucket'));
 
 /**
  * callback from auth with github
