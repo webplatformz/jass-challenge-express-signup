@@ -87,7 +87,7 @@ passport.use(new GithubStrategy({
     (accesstoken, refreshtoken, githubProfile, done) => {
         const username = githubProfile.username;
         const email = githubProfile.emails[0].value;
-        const avatarUrl = githubProfile._json['avatar_url'];
+        const avatarUrl = githubProfile._json.avatar_url;
         findCreateProfile(username, email, avatarUrl, githubProfile, done);
     }
 ));
