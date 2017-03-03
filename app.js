@@ -37,7 +37,7 @@ passport.deserializeUser((obj, done) => {
  * @param payload: result from authentication
  * @param done: callback
  */
-const findCreateProfile = (username, provider, payload, done) => {
+const findCreateProfile = (username, email, payload, done) => {
     // find or create user profile
     RedisClient.hgetall(username, (err, stored) => {
         if (err) {
@@ -47,8 +47,8 @@ const findCreateProfile = (username, provider, payload, done) => {
         // new profile if none found
         if (!stored) {
             const creatable = {
-                username: username,
-                email: '',
+                username,
+                email,
                 gender: '',
                 matrikel: '',
                 school: '',
@@ -57,7 +57,7 @@ const findCreateProfile = (username, provider, payload, done) => {
                 fullname: '',
                 repo: '',
                 academicyear: '',
-                provider: provider,
+                provider: payload.provider,
                 profile: payload._raw
             };
 
@@ -79,12 +79,14 @@ const findCreateProfile = (username, provider, payload, done) => {
 passport.use(new GithubStrategy({
         clientID: GITHUB_KEY,
         clientSecret: GITHUB_SECRET,
-        callbackURL: config.get('githubCallbackUrl')
+        callbackURL: config.get('githubCallbackUrl'),
+        scope: ['user:email']
     },
     (accesstoken, refreshtoken, githubProfile, done) => {
-        const provider = 'github';
         const username = githubProfile.username;
-        findCreateProfile(username, provider, githubProfile, done);
+        const email = githubProfile.emails[0].value;
+
+        findCreateProfile(username, email, githubProfile, done);
     }
 ));
 
@@ -92,15 +94,17 @@ passport.use(new GithubStrategy({
  * configure passport to use bitbucket strategy
  */
 passport.use(new BitbucketStrategy({
-    clientID: BITBUCKET_KEY,
-    clientSecret: BITBUCKET_SECRET,
-    callbackURL: config.get('bitbucketCallbackUrl')
-  },
-  (token, tokenSecret, bitbucketProfile, done) => {
-    const provider = 'bitbucket';
-    const username = bitbucketProfile.username;
-    findCreateProfile(username, provider, bitbucketProfile, done);
-  }
+        clientID: BITBUCKET_KEY,
+        clientSecret: BITBUCKET_SECRET,
+        callbackURL: config.get('bitbucketCallbackUrl'),
+        scope: ['email']
+    },
+    (token, tokenSecret, bitbucketProfile, done) => {
+        console.log(bitbucketProfile);
+        const username = bitbucketProfile.username;
+        const email = '';
+        findCreateProfile(username, email, bitbucketProfile, done);
+    }
 ));
 
 // setup express app
@@ -128,32 +132,30 @@ app.use(express.static(__dirname + '/build/client'));
 app.get('/api/auth/user', (req, res) => {
     const user = req.user || {};
     const isAuthenticated = req.isAuthenticated();
-    res.json({isAuthenticated: isAuthenticated, user: user});
+    res.json({ isAuthenticated: isAuthenticated, user: user });
 });
 
 /**
  * authenticate with github
  */
-app.get('/api/auth/github', passport.authenticate('github', {scope: ['user:email']}), (/*req, res */) => { /* redirects to github */
-});
+app.get('/api/auth/github', passport.authenticate('github'), (/*req, res */) => { /* redirects to github */ });
 
 /**
  * authenticate with bitbucket
  */
-app.get('/api/auth/bitbucket', passport.authenticate('bitbucket'), (/*req, res */) => { /* redirects to bitbucket */
-});
+app.get('/api/auth/bitbucket', passport.authenticate('bitbucket'), (/*req, res */) => { /* redirects to bitbucket */ });
 
 /**
  * callback from auth with github
  */
-app.get('/api/auth/github/callback', passport.authenticate('github', {failureRedirect: '/login'}), (req, res) => {
+app.get('/api/auth/github/callback', passport.authenticate('github', { failureRedirect: '/' }), (req, res) => {
     res.redirect('/profile');
 });
 
 /**
  * callback from auth with bitbucket
  */
-app.get('/api/auth/bitbucket/callback', passport.authenticate('bitbucket', {failureRedirect: '/login'}), (req, res) => {
+app.get('/api/auth/bitbucket/callback', passport.authenticate('bitbucket', { failureRedirect: '/' }), (req, res) => {
     res.redirect('/profile');
 });
 
@@ -169,7 +171,7 @@ app.get('/api/auth/logout', (req, res) => {
  * serve react app
  */
 app.get('/*', (req, res) => {
-    res.sendFile('index.html', {root: __dirname + '/build/client'});
+    res.sendFile('index.html', { root: __dirname + '/build/client' });
 });
 
 /**
@@ -189,7 +191,7 @@ app.patch('/api/users', ensureAuthenticated, (req, res) => {
 
     // profile to update is determined on user making request
     const username = req.user.username;
-    const {email, matrikel, school, degreeProgram, degree, gender, fullname, repo, academicyear} = req.body;
+    const { email, matrikel, school, degreeProgram, degree, gender, fullname, repo, academicyear } = req.body;
 
     RedisClient.hmset(username, 'email', email, 'matrikel', matrikel, 'school', school, 'degreeProgram', degreeProgram, 'degree', degree, 'gender', gender, 'fullname', fullname, 'repo', repo, 'academicyear', academicyear, (err, reply) => {
         if (err) {
