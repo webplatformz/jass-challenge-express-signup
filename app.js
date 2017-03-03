@@ -8,6 +8,7 @@ const passport = require('passport');
 const expressSession = require('express-session');
 const GithubStrategy = require('passport-github2').Strategy;
 const BitbucketStrategy = require('passport-bitbucket-oauth2').Strategy;
+const https = require('https');
 
 const GITHUB_KEY = config.get('githubKey');
 const GITHUB_SECRET = config.get('githubSecret');
@@ -100,10 +101,24 @@ passport.use(new BitbucketStrategy({
         scope: ['email']
     },
     (token, tokenSecret, bitbucketProfile, done) => {
-        console.log(bitbucketProfile);
-        const username = bitbucketProfile.username;
-        const email = '';
-        findCreateProfile(username, email, bitbucketProfile, done);
+        https.request({
+            host: 'api.bitbucket.org',
+            path: '/2.0/user/emails',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Accept': 'application/json'
+            }
+        }, (response) => {
+            let responseText = '';
+
+            response.on('data', data => responseText += data);
+
+            response.on('end', () => {
+                const username = bitbucketProfile.username;
+                const email = JSON.parse(responseText).values[0].email;
+                findCreateProfile(username, email, bitbucketProfile, done);
+            });
+        }).end();
     }
 ));
 
