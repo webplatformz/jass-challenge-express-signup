@@ -38,7 +38,7 @@ passport.deserializeUser((obj, done) => {
  * @param payload: result from authentication
  * @param done: callback
  */
-const findCreateProfile = (username, email, payload, done) => {
+const findCreateProfile = (username, email, avatarUrl, payload, done) => {
     // find or create user profile
     RedisClient.hgetall(username, (err, stored) => {
         if (err) {
@@ -50,6 +50,7 @@ const findCreateProfile = (username, email, payload, done) => {
             const creatable = {
                 username,
                 email,
+                avatarUrl,
                 gender: '',
                 matrikel: '',
                 school: '',
@@ -86,8 +87,8 @@ passport.use(new GithubStrategy({
     (accesstoken, refreshtoken, githubProfile, done) => {
         const username = githubProfile.username;
         const email = githubProfile.emails[0].value;
-
-        findCreateProfile(username, email, githubProfile, done);
+        const avatarUrl = githubProfile._json['avatar_url'];
+        findCreateProfile(username, email, avatarUrl, githubProfile, done);
     }
 ));
 
@@ -116,7 +117,8 @@ passport.use(new BitbucketStrategy({
             response.on('end', () => {
                 const username = bitbucketProfile.username;
                 const email = JSON.parse(responseText).values[0].email;
-                findCreateProfile(username, email, bitbucketProfile, done);
+                const avatarUrl = bitbucketProfile._json.links.avatar.href;
+                findCreateProfile(username, email, avatarUrl, bitbucketProfile, done);
             });
         }).end();
     }

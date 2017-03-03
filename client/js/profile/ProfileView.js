@@ -13,10 +13,7 @@ const ProfileView = ({
         fullname,
         repo,
         academicyear,
-        profile: {
-            url,
-            avatar_url
-        }
+        avatarUrl
     }
 }) => (
     <div>
@@ -97,7 +94,7 @@ const ProfileView = ({
             </Form>
         </Col>
         <Col sm={3}>
-            <img className="profile-avatar" src={avatar_url} alt="" />
+            <img className="profile-avatar" src={avatarUrl} alt="" />
         </Col>
     </div>
 );
