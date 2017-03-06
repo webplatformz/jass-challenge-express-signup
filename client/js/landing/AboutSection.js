@@ -15,12 +15,14 @@ const AboutSection = ({
                         <hr className="section-heading-spacer" />
                         <div className="clearfix"></div>
                         <h2 className="section-heading">Zühlke Jass-Challenge 2017</h2>
-                        <p className="lead">You are a student, programmer and you have some Jass experience? Then it is
+                        <p className="lead">
+                            You are a student, programmer and you have some Jass experience? Then it is
                             time to prove your skills and create your own Jass-Bot that will compete against other
-                            Bot’s.
+                            Bots.
                         </p>
-                        <p className="lead">Zühlke Engineering AG invites you to participate in a unique challenge where
-                            we want to find the best Jass implementation from students in switzerland.
+                        <p className="lead">
+                            Zühlke Engineering AG invites you to participate in a unique challenge where
+                            we want to find the best Jass implementation from students in Switzerland.
                         </p>
                     </Col>
                 </Row>
