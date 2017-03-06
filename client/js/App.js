@@ -30,7 +30,10 @@ App.propTypes = {
 };
 
 export default connect(
-    state => state.user,
+    state => ({
+        authenticationChecked: state.user.authenticationChecked,
+        isAuthenticated: state.user.isAuthenticated,
+    }),
     {
         onAuthenticateGithubClick: authenticateGithub,
         onAuthenticateBitbucketClick: authenticateBitbucket,
