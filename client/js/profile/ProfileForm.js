@@ -27,14 +27,12 @@ const renderField = ({
     </FormGroup>
 );
 
-// TODO: hook up handle submit to redux action (onSubmitProfileData)
-
 const ProfileForm = ({
     onCancel,
     handleSubmit,
     isEditing
 }) => (
-    <Form horizontal onSubmit={handleSubmit}>
+    <Form name="someForm" horizontal onSubmit={handleSubmit}>
         <Field name="gender"
                type="text"
                component={renderField}

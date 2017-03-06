@@ -54,6 +54,7 @@ export default (state = initialState, action) => {
         case UPDATE_PROFILE_CANCEL:
             return Object.assign({}, state, {
                 isEditingProfile: false,
+                isUpdatingProfile: false
             });
 
         default:

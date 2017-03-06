@@ -1,10 +1,9 @@
 import fetch from 'isomorphic-fetch';
-
+import { reset } from 'redux-form';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const AUTHENTICATE_GITHUB = 'AUTHENTICATE_GITHUB';
 export const AUTHENTICATE_BITBUCKET = 'AUTHENTICATE_BITBUCKET';
 export const LOGOUT = 'LOGOUT';
-
 export const TOGGLE_EDIT_PROFILE = 'TOGGLE_EDIT_PROFILE';
 export const UPDATE_PROFILE_CANCEL = 'UPDATE_PROFILE_CANCEL';
 export const UPDATE_PROFILE_REQUEST = 'UPDATE_PROFILE_REQUEST';
@@ -21,7 +20,6 @@ export const updateProfile = (profile) => {
             }
         })
             .then(() => {
-                dispatch(checkAuth());
                 dispatch(updateProfileCancel());
             })
             .catch(error => {
@@ -86,3 +84,10 @@ export const toggleEditingProfile = () => {
         type: TOGGLE_EDIT_PROFILE
     };
 };
+
+export const resetFormAndToggleEditing = () => {
+    return dispatch => {
+        dispatch(reset('profile'));
+        dispatch(toggleEditingProfile());
+    };
+}
