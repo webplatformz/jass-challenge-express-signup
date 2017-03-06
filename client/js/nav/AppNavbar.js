@@ -1,10 +1,6 @@
 import React from 'react';
-
 import {connect} from 'react-redux';
-
-import {LinkContainer} from 'react-router-bootstrap';
 import {Link} from 'react-router';
-
 import Navbar from 'react-bootstrap/lib/Navbar';
 import NavbarHeader from 'react-bootstrap/lib/NavbarHeader';
 import NavbarBrand from 'react-bootstrap/lib/NavbarBrand';
