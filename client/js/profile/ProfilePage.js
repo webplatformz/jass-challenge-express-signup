@@ -1,9 +1,8 @@
 import React, { PropTypes } from 'react';
-import { Button } from 'react-bootstrap';
+import { Button, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { toggleEditingProfile, updateProfile } from '../redux/actions/index';
 import ProfileForm from './ProfileForm';
-import ProfileView from './ProfileView';
 
 const ProfilePage = ({
     isEditingProfile,
@@ -18,7 +17,8 @@ const ProfilePage = ({
         gender,
         fullname,
         repo,
-        academicyear
+        academicyear,
+        avatarUrl
     }
 }) => {
     const handleSubmit = (values) => {
@@ -27,22 +27,28 @@ const ProfilePage = ({
 
     const initialFormValues = { email, matrikel, school, degreeProgram, degree, gender, fullname, repo, academicyear };
 
-    const profileComponent = isEditingProfile ?
-        <ProfileForm onCancel={onToggleEditingProfile} onSubmit={handleSubmit} initialValues={initialFormValues} /> :
-        <ProfileView />;
-    const editButton = isEditingProfile ? '' :
-        <Button className="pull-right" onClick={onToggleEditingProfile}>Edit</Button>;
-
     return (
         <div>
             <div className="content-section-b">
                 <div className="container">
                     <h3>
                         My Profile
-                        {editButton}
+                        {!isEditingProfile &&
+                            <Button className="pull-right" onClick={onToggleEditingProfile}>Edit</Button>
+                        }
                     </h3>
                     <hr />
-                    {profileComponent}
+                    <Col sm={9}>
+                        <ProfileForm
+                            onCancel={onToggleEditingProfile}
+                            onSubmit={handleSubmit}
+                            initialValues={initialFormValues}
+                            isEditing={isEditingProfile}
+                        />
+                    </Col>
+                    <Col sm={3}>
+                        <img className="profile-avatar" src={avatarUrl} alt="" />
+                    </Col>
                 </div>
             </div>
         </div>
@@ -56,10 +62,7 @@ ProfilePage.propTypes = {
 };
 
 export default connect(
-    state => ({
-        isEditingProfile: state.user.isEditingProfile,
-        user: state.user.user,
-    }),
+    state => state.user,
     {
         onToggleEditingProfile: toggleEditingProfile,
         onSubmitProfileData: updateProfile
