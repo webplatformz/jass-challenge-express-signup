@@ -18,7 +18,7 @@ const renderField = ({
 }) => (
     <FormGroup validationState={(touched && error) ? 'error' : null}>
         <Col sm={2}>
-            <ControlLabel className="pull-right">{label}</ControlLabel>
+            <ControlLabel>{label}</ControlLabel>
         </Col>
         <Col sm={8}>
             <FormControl {...input} placeholder="Missing information" type={type} disabled={disabled} />
@@ -35,6 +35,13 @@ const ProfileForm = ({
     isEditing
 }) => (
     <Form horizontal onSubmit={handleSubmit}>
+        <Field name="gender"
+               type="text"
+               component={renderField}
+               label="Gender"
+               validate={[required]}
+               disabled={!isEditing}
+        />
         <Field name="fullname"
                type="text"
                component={renderField}
@@ -53,13 +60,6 @@ const ProfileForm = ({
                type="text"
                component={renderField}
                label="E-mail"
-               validate={[required]}
-               disabled={!isEditing}
-        />
-        <Field name="gender"
-               type="text"
-               component={renderField}
-               label="Gender"
                validate={[required]}
                disabled={!isEditing}
         />
