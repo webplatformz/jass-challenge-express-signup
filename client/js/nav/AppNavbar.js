@@ -15,7 +15,7 @@ const AppNavbar = ({isTransparent, isAuthenticated}) => {
     const buttons = isAuthenticated ? <LoggedInButtons/> : <LoggedOutButtons/>;
 
     return (
-        <Navbar fixedTop className={isTransparent ? 'transparent' : ''}>
+        <Navbar fixedTop inverse className={isTransparent ? 'transparent' : ''}>
             <NavbarHeader>
                 <NavbarBrand>
                     <Link to="/">Jass-Challenge</Link>
