@@ -1,4 +1,3 @@
-import fetch from 'isomorphic-fetch';
 import { reset } from 'redux-form';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const AUTHENTICATE_GITHUB = 'AUTHENTICATE_GITHUB';
