@@ -11,13 +11,12 @@ import App from './js/App';
 
 import './styles/main.less';
 
+const store = createStore(reducer, window.__PRELOADED_STATE__, applyMiddleware(thunkMiddleware));
+
 polyfillLoader({
     "features": "Promise,fetch",
     "onCompleted": main
 });
-
-const store = createStore(reducer, window.__PRELOADED_STATE__, applyMiddleware(thunkMiddleware));
-
 
 function main() {
     render(
