@@ -9,9 +9,15 @@ import NavbarToggle from 'react-bootstrap/lib/NavbarToggle';
 import NavbarCollapse from 'react-bootstrap/lib/NavbarCollapse';
 import Nav from 'react-bootstrap/lib/Nav';
 import NavItem from 'react-bootstrap/lib/NavItem';
-import { logout } from '../redux/actions/index';
+import { logout, enteredSection } from '../redux/actions/index';
 
-const AppNavbar = ({ isTransparent, isAuthenticated, onLogoutClick, activeNavItemHref }) => (
+const AppNavbar = ({
+    isTransparent,
+    isAuthenticated,
+    onLogoutClick,
+    activeNavItemHref,
+    enteredSection
+}) => (
     <Navbar fixedTop inverse className={isTransparent ? 'transparent' : ''}>
         <NavbarHeader>
             <NavbarBrand>
@@ -21,8 +27,12 @@ const AppNavbar = ({ isTransparent, isAuthenticated, onLogoutClick, activeNavIte
         </NavbarHeader>
         <NavbarCollapse>
             <Nav activeHref={activeNavItemHref} pullRight>
-                <NavItem href={'/#about'}>About</NavItem>
-                <NavItem href={'/#participate'}>Participate</NavItem>
+                <NavItem href={'/#about'} onClick={() => enteredSection('about')}>
+                    About
+                </NavItem>
+                <NavItem href={'/#participate'} onClick={() => enteredSection('participate')}>
+                    Participate
+                </NavItem>
                 {isAuthenticated &&
                 <LinkContainer to={'/profile'}>
                     <NavItem>My Profile</NavItem>
@@ -40,7 +50,8 @@ AppNavbar.propTypes = {
     isTransparent: React.PropTypes.bool,
     isAuthenticated: React.PropTypes.bool,
     activeNavItemHref: React.PropTypes.string,
-    onLogoutClick: React.PropTypes.func
+    onLogoutClick: React.PropTypes.func,
+    enteredSection: React.PropTypes.func
 };
 
 export default connect(
@@ -49,6 +60,7 @@ export default connect(
         activeNavItemHref: state.navigation.activeNavItemHref
     }),
     {
-        onLogoutClick: logout
+        onLogoutClick: logout,
+        enteredSection
     }
 )(AppNavbar);
