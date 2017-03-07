@@ -6,6 +6,8 @@ export const LOGOUT = 'LOGOUT';
 export const TOGGLE_EDIT_PROFILE = 'TOGGLE_EDIT_PROFILE';
 export const UPDATE_PROFILE_CANCEL = 'UPDATE_PROFILE_CANCEL';
 export const UPDATE_PROFILE_REQUEST = 'UPDATE_PROFILE_REQUEST';
+export const ENTERED_SECTION = 'ENTERED_SECTION';
+export const LEFT_SECTION = 'LEFT_SECTION';
 
 export const updateProfile = (profile) => {
     return dispatch => {
@@ -89,4 +91,14 @@ export const resetFormAndToggleEditing = () => {
         dispatch(reset('profile'));
         dispatch(toggleEditingProfile());
     };
-}
+};
+
+export const enteredSection = sectionName => ({
+    type: ENTERED_SECTION,
+    sectionName
+});
+
+export const leftSection = sectionName => ({
+    type: LEFT_SECTION,
+    sectionName
+});

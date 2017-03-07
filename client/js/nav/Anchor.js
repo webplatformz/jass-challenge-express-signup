@@ -1,13 +1,10 @@
 import React from 'react';
 
-const Anchor = ({ children, id }) => (
-    <a name={id} id={id} href={'#' + id} className="anchor">
-        {children}
-    </a>
+const Anchor = ({ id }) => (
+    <a name={id} id={id} className="anchor" />
 );
 
 Anchor.propTypes = {
-    children: React.PropTypes.object,
     id: React.PropTypes.string
 };
 
