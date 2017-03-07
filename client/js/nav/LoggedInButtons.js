@@ -1,29 +1,21 @@
-import React, {PropTypes} from 'react';
-
-import {LinkContainer} from 'react-router-bootstrap';
-import {Link} from 'react-router';
-
+import React, { PropTypes } from 'react';
+import { connect } from "react-redux";
+import { LinkContainer } from 'react-router-bootstrap';
 import Nav from 'react-bootstrap/lib/Nav';
 import NavItem from 'react-bootstrap/lib/NavItem';
+import { logout } from '../redux/actions/index';
 
-import {logout} from '../redux/actions/index';
-import {connect} from "react-redux";
-
-const LoggedInButtons = ({onLogoutClick}) => {
-    return (
-        <div>
-            <Nav pullRight>
-                <NavItem href={'/#about'}>About</NavItem>
-                <LinkContainer to={'/profile'}>
-                    <NavItem>My Profile</NavItem>
-                </LinkContainer>
-                <LinkContainer to={'/#'} onClick={onLogoutClick}>
-                    <NavItem>Logout</NavItem>
-                </LinkContainer>
-            </Nav>
-        </div>
-    );
-};
+const LoggedInButtons = ({ onLogoutClick }) => (
+    <Nav pullRight>
+        <NavItem href={'/#about'}>About</NavItem>
+        <LinkContainer to={'/profile'}>
+            <NavItem>My Profile</NavItem>
+        </LinkContainer>
+        <LinkContainer to={'/#'} onClick={onLogoutClick}>
+            <NavItem>Logout</NavItem>
+        </LinkContainer>
+    </Nav>
+);
 
 LoggedInButtons.propTypes = {
     onLogoutClick: PropTypes.func,
@@ -31,6 +23,6 @@ LoggedInButtons.propTypes = {
 
 export default connect(
     state => ({}),
-    {onLogoutClick: logout,}
+    { onLogoutClick: logout, }
 )(LoggedInButtons);
 
