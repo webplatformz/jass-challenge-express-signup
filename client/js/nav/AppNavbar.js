@@ -9,14 +9,15 @@ import NavbarToggle from 'react-bootstrap/lib/NavbarToggle';
 import NavbarCollapse from 'react-bootstrap/lib/NavbarCollapse';
 import Nav from 'react-bootstrap/lib/Nav';
 import NavItem from 'react-bootstrap/lib/NavItem';
-import { logout, enteredSection } from '../redux/actions/index';
+import { logout, enteredSection, cleanSections } from '../redux/actions/index';
 
 const AppNavbar = ({
     isTransparent,
     isAuthenticated,
     onLogoutClick,
     activeNavItemHref,
-    enteredSection
+    enteredSection,
+    cleanSections
 }) => (
     <Navbar fixedTop inverse className={isTransparent ? 'transparent' : ''}>
         <NavbarHeader>
@@ -34,7 +35,7 @@ const AppNavbar = ({
                     Participate
                 </NavItem>
                 {isAuthenticated &&
-                <LinkContainer to={'/profile'}>
+                <LinkContainer to={'/profile'} onClick={() => cleanSections()}>
                     <NavItem>My Profile</NavItem>
                 </LinkContainer>
                 }
@@ -51,7 +52,8 @@ AppNavbar.propTypes = {
     isAuthenticated: React.PropTypes.bool,
     activeNavItemHref: React.PropTypes.string,
     onLogoutClick: React.PropTypes.func,
-    enteredSection: React.PropTypes.func
+    enteredSection: React.PropTypes.func,
+    cleanSections: React.PropTypes.func,
 };
 
 export default connect(
@@ -61,6 +63,7 @@ export default connect(
     }),
     {
         onLogoutClick: logout,
-        enteredSection
+        enteredSection,
+        cleanSections
     }
 )(AppNavbar);

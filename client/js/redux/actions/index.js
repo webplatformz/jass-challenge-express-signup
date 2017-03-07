@@ -8,6 +8,7 @@ export const UPDATE_PROFILE_CANCEL = 'UPDATE_PROFILE_CANCEL';
 export const UPDATE_PROFILE_REQUEST = 'UPDATE_PROFILE_REQUEST';
 export const ENTERED_SECTION = 'ENTERED_SECTION';
 export const LEFT_SECTION = 'LEFT_SECTION';
+export const CLEAN_SECTIONS = 'CLEAN_SECTIONS';
 
 export const updateProfile = (profile) => {
     return dispatch => {
@@ -101,4 +102,8 @@ export const enteredSection = sectionName => ({
 export const leftSection = sectionName => ({
     type: LEFT_SECTION,
     sectionName
+});
+
+export const cleanSections = () => ({
+    type: CLEAN_SECTIONS
 });

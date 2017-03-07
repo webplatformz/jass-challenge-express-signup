@@ -1,4 +1,4 @@
-import { ENTERED_SECTION, LEFT_SECTION } from '../actions/index';
+import { ENTERED_SECTION, LEFT_SECTION, CLEAN_SECTIONS } from '../actions/index';
 
 const initialState = {
     activeNavItemHref: undefined,
@@ -19,6 +19,11 @@ export default (state = initialState, action) => {
             activeSections = activeSections.filter(section => section !== action.sectionName);
             return Object.assign({}, state, {
                 activeNavItemHref: getLastActiveSectionAsHref()
+            });
+        case CLEAN_SECTIONS:
+            activeSections = [];
+            return Object.assign({}, state, {
+                activeNavItemHref: initialState.activeNavItemHref
             });
         default:
             return state;
