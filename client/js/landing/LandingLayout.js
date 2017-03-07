@@ -13,10 +13,9 @@ class LandingLayout extends Component {
     }
 
     render() {
-        const isNavbarTransparent = this.state.isNavbarTransparent;
         return (
             <div>
-                <AppNavbar isTransparent={isNavbarTransparent}/>
+                <AppNavbar isTransparent={this.state.isNavbarTransparent}/>
                 <Waypoint
                     onEnter={() => this.setState({isNavbarTransparent: true})}
                     onLeave={() => this.setState({isNavbarTransparent: false})}
