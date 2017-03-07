@@ -5,7 +5,6 @@ import { authenticateGithub, authenticateBitbucket } from '../redux/actions/inde
 import GithubImage from '../../images/github.svg';
 import BitbucketImage from '../../images/bitbucket.svg';
 
-
 const HeroSection = ({ onAuthenticateGithubClick, onAuthenticateBitbucketClick }) => (
     <div>
         <div className="intro-header">

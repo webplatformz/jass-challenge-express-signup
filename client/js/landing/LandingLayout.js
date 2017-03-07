@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-
+import Waypoint from 'react-waypoint';
 import Footer from '../layout/Footer';
 import AppNavbar from '../nav/AppNavbar';
 
@@ -7,25 +7,9 @@ class LandingLayout extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {isNavbarTransparent: true};
-    }
-
-    handleScroll() {
-        const offset = 50;
-        const windowScrollTop = window.pageYOffset;
-        if (windowScrollTop <= offset) {
-            this.setState({isNavbarTransparent: true});
-        } else {
-            this.setState({isNavbarTransparent: false});
-        }
-    }
-
-    componentDidMount() {
-        window.addEventListener('scroll', this.handleScroll.bind(this));
-    }
-
-    componentWillUnmount() {
-        window.removeEventListener('scroll', this.handleScroll.bind(this));
+        this.state = {
+            isNavbarTransparent: true
+        };
     }
 
     render() {
@@ -33,6 +17,11 @@ class LandingLayout extends Component {
         return (
             <div>
                 <AppNavbar isTransparent={isNavbarTransparent}/>
+                <Waypoint
+                    onEnter={() => this.setState({isNavbarTransparent: true})}
+                    onLeave={() => this.setState({isNavbarTransparent: false})}
+                    topOffset={'-50px'}
+                />
                 {this.props.children}
                 <Footer />
             </div>
