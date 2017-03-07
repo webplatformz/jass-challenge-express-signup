@@ -8,6 +8,7 @@ import { logout } from '../redux/actions/index';
 const LoggedInButtons = ({ onLogoutClick }) => (
     <Nav pullRight>
         <NavItem href={'/#about'}>About</NavItem>
+        <NavItem href={'/#participate'}>Participate</NavItem>
         <LinkContainer to={'/profile'}>
             <NavItem>My Profile</NavItem>
         </LinkContainer>

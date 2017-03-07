@@ -1,8 +1,7 @@
 import React from 'react';
-
 import HeroSection from './HeroSection';
 import AboutSection from './AboutSection';
-import BotSection from './BotSection';
+import BotSection from './ParticipateSection';
 
 const LandingPage = () => {
     return (

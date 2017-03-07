@@ -1,6 +1,6 @@
 import React from 'react';
-import Anchor from '../nav/Anchor';
 import { Col, Row } from 'react-bootstrap';
+import Anchor from '../nav/Anchor';
 
 const AboutSection = ({
     onBefore,
