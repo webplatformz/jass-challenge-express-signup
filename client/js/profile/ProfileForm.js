@@ -12,6 +12,7 @@ const renderField = ({
     type,
     disabled,
     min,
+    placeholder = 'Missing information',
     meta: {
         touched,
         error,
@@ -23,7 +24,7 @@ const renderField = ({
             <ControlLabel>{label}</ControlLabel>
         </Col>
         <Col sm={8}>
-            <FormControl {...input} placeholder="Missing information" type={type} disabled={disabled} min={min} />
+            <FormControl {...input} placeholder={placeholder} type={type} disabled={disabled} min={min} />
             {touched && ((error && <span className="small">{error}</span>))}
         </Col>
     </FormGroup>
@@ -71,6 +72,7 @@ const ProfileForm = ({
                type="text"
                component={renderField}
                label="Full Name"
+               placeholder="First and last name"
                validate={[required]}
                disabled={!isEditing}
         />
@@ -78,6 +80,7 @@ const ProfileForm = ({
                type="url"
                component={renderField}
                label="Repository URL"
+               placeholder="github.com/myUser/myBotrepo"
                validate={[required]}
                disabled={!isEditing}
         />
