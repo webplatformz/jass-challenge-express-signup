@@ -12,14 +12,13 @@ import NavItem from 'react-bootstrap/lib/NavItem';
 import { logout, enteredSection, cleanSections } from '../redux/actions/index';
 
 const AppNavbar = ({
-    isTransparent,
     isAuthenticated,
     onLogoutClick,
     activeNavItemHref,
     enteredSection,
     cleanSections
 }) => (
-    <Navbar fixedTop inverse className={isTransparent ? 'transparent' : ''}>
+    <Navbar fixedTop>
         <NavbarHeader>
             <NavbarBrand>
                 <Link to="/">Jass-Challenge</Link>
@@ -48,7 +47,6 @@ const AppNavbar = ({
 );
 
 AppNavbar.propTypes = {
-    isTransparent: React.PropTypes.bool,
     isAuthenticated: React.PropTypes.bool,
     activeNavItemHref: React.PropTypes.string,
     onLogoutClick: React.PropTypes.func,
