@@ -7,9 +7,8 @@ import BitbucketImage from '../../images/bitbucket.svg';
 
 const HeroSection = ({ onAuthenticateGithubClick, onAuthenticateBitbucketClick }) => (
     <div>
-        <div className="intro-header">
-            <div className="container intro-header__container">
-                <img className="intro-header__logo" src="/assets/images/logo-zuehlke-small.png" />
+        <div className="intro-header intro-header__home">
+            <div className="container">
                 <Row>
                     <Col lg={12}>
                         <div className="intro-message">

@@ -18,10 +18,12 @@ const AppNavbar = ({
     enteredSection,
     cleanSections
 }) => (
-    <Navbar fixedTop>
-        <NavbarHeader>
+    <Navbar>
+        <NavbarHeader className="navbar-logo">
             <NavbarBrand>
-                <Link to="/">Jass-Challenge</Link>
+                <Link to="/">
+                    <img className="navbar-logo__image" src="/assets/images/logo-zuehlke.jpg" />
+                </Link>
             </NavbarBrand>
             <NavbarToggle />
         </NavbarHeader>

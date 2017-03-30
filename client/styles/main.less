@@ -28,9 +28,37 @@ h6 {
   font-size: 14px;
 }
 
+.navbar {
+  margin-bottom: 0;
+}
+
+.navbar-logo {
+  position: relative;
+
+  &__image {
+    position: absolute;
+    top: 0;
+    left: -1px;
+    width: 135px;
+    height: 135px;
+  }
+}
+
+@media (max-width: @screen-xs-max) {
+  .navbar-logo__image {
+    width: 60px;
+    height: 60px;
+  }
+}
+
 .lead {
   font-size: 18px;
   font-weight: 400;
+  text-align: justify;
+
+  &__spacing {
+    padding: 20px 0;
+  }
 }
 
 .intro-header {
@@ -38,20 +66,14 @@ h6 {
   padding-bottom: 50px;
   text-align: center;
   color: #f8f8f8;
-  /* add background image
-  background: url(../public/img/) no-repeat center center;
-  */
-  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(../images/landing-bg.jpg) no-repeat center center;
   background-size: cover;
 
-  &__container {
-    position: relative;
+  &__home {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(../images/landing-bg.jpg) no-repeat center center;
   }
 
-  &__logo {
-    position: absolute;
-    left: 20px;
-    top: 0;
+  &__profile {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(../images/profile-bg.jpg) no-repeat center center;
   }
 }
 
@@ -59,8 +81,7 @@ h6 {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 190px;
-  padding-bottom: 80px;
+  padding: 20% 0;
 }
 
 .intro-message > h1 {
@@ -70,7 +91,7 @@ h6 {
 }
 
 .intro-divider {
-  width: 400px;
+  width: 200px;
   border-top: 1px solid #f8f8f8;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 }
@@ -121,12 +142,17 @@ h6 {
   border-bottom: 1px solid #e7e7e7;
 }
 
+@media (min-width: @screen-xs-max + 1) {
+  .content-section-b {
+    padding: 500px 0;
+  }
+}
+
 .section-heading {
   margin-bottom: 30px;
 }
 
 .section-heading-spacer {
-  float: left;
   width: 200px;
   border-top: 3px solid #e7e7e7;
 }
@@ -180,25 +206,6 @@ h6 {
 footer {
   padding: 20px 0;
   background-color: #f8f8f8;
-}
-
-.navbar.transparent {
-  background-color: transparent !important;
-  border: 0px;
-  color: #fff;
-}
-
-.navbar.transparent .container .navbar-header .navbar-brand {
-  color: #fff;
-}
-
-.navbar.transparent .container .navbar-collapse .navbar-right li a {
-  color: #fff !important;
-}
-
-.navbar.transparent .container .navbar-collapse .navbar-right li a:hover {
-  background-color: #fff !important;
-  color: #777 !important;
 }
 
 .btn.transparent {
