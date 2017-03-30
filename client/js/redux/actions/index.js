@@ -93,17 +93,3 @@ export const resetFormAndToggleEditing = () => {
         dispatch(toggleEditingProfile());
     };
 };
-
-export const enteredSection = sectionName => ({
-    type: ENTERED_SECTION,
-    sectionName
-});
-
-export const leftSection = sectionName => ({
-    type: LEFT_SECTION,
-    sectionName
-});
-
-export const cleanSections = () => ({
-    type: CLEAN_SECTIONS
-});

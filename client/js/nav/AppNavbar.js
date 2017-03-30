@@ -14,7 +14,6 @@ import { logout, enteredSection, cleanSections } from '../redux/actions/index';
 const AppNavbar = ({
     isAuthenticated,
     onLogoutClick,
-    activeNavItemHref,
     enteredSection,
     cleanSections
 }) => (
@@ -28,15 +27,15 @@ const AppNavbar = ({
             <NavbarToggle />
         </NavbarHeader>
         <NavbarCollapse>
-            <Nav activeHref={activeNavItemHref} pullRight>
-                <NavItem href={'/#about'} onClick={() => enteredSection('about')}>
+            <Nav pullRight>
+                <NavItem href={'/#about'}>
                     About
                 </NavItem>
-                <NavItem href={'/#participate'} onClick={() => enteredSection('participate')}>
+                <NavItem href={'/#participate'}>
                     Participate
                 </NavItem>
                 {isAuthenticated &&
-                <LinkContainer to={'/profile'} onClick={() => cleanSections()}>
+                <LinkContainer to={'/profile'}>
                     <NavItem>My Profile</NavItem>
                 </LinkContainer>
                 }
@@ -50,7 +49,6 @@ const AppNavbar = ({
 
 AppNavbar.propTypes = {
     isAuthenticated: React.PropTypes.bool,
-    activeNavItemHref: React.PropTypes.string,
     onLogoutClick: React.PropTypes.func,
     enteredSection: React.PropTypes.func,
     cleanSections: React.PropTypes.func,
@@ -59,11 +57,8 @@ AppNavbar.propTypes = {
 export default connect(
     (state) => ({
         isAuthenticated: state.user.isAuthenticated,
-        activeNavItemHref: state.navigation.activeNavItemHref
     }),
     {
         onLogoutClick: logout,
-        enteredSection,
-        cleanSections
     }
 )(AppNavbar);
