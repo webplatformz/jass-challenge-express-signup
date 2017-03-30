@@ -131,7 +131,7 @@ app.use(passport.session());
 app.use(compression());
 
 // client dir as static resources
-app.use(express.static(__dirname + '/build/client'));
+app.use(express.static(__dirname + '/../build/client'));
 
 /**
  * get user info of logged in user
@@ -178,7 +178,7 @@ app.get('/api/auth/logout', (req, res) => {
  * serve react app
  */
 app.get('/*', (req, res) => {
-  res.sendFile('index.html', { root: __dirname + '/build/client' });
+  res.sendFile('index.html', { root: __dirname + '/../build/client' });
 });
 
 /**
