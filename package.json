@@ -5,14 +5,14 @@
     "node": ">7.0.0"
   },
   "description": "Sign Up Page for the Jass-Challenge",
-  "main": "app.js",
+  "main": "./server/app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "clean": "rimraf build && mkdirp build/client",
     "prebuild": "npm run clean",
     "prestart": "webpack -p",
-    "start": "node app.js",
-    "dev": "parallelshell \"webpack-dev-server\" \"nodemon app.js\""
+    "start": "node ./server/app.js",
+    "dev": "parallelshell \"webpack-dev-server\" \"nodemon ./server/app.js\""
   },
   "author": "",
   "license": "ISC",
@@ -33,6 +33,7 @@
     "express": "4.14.0",
     "express-session": "1.14.2",
     "file-loader": "0.10.1",
+    "flat": "2.0.1",
     "html-webpack-plugin": "2.26.0",
     "less": "2.7.1",
     "less-loader": "2.2.3",

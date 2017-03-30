@@ -54,6 +54,7 @@ const ProfilePage = ({
 ProfilePage.propTypes = {
   isEditingProfile: PropTypes.bool,
   onToggleEditingProfile: PropTypes.func,
+  onSubmitProfileData: PropTypes.func,
   user: PropTypes.object,
 };
 
