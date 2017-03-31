@@ -12,53 +12,50 @@ import NavItem from 'react-bootstrap/lib/NavItem';
 import { logout, enteredSection, cleanSections } from '../redux/actions/index';
 
 const AppNavbar = ({
-    isAuthenticated,
-    onLogoutClick,
-    enteredSection,
-    cleanSections
-}) => (
-    <Navbar>
-        <NavbarHeader className="navbar-logo">
-            <NavbarBrand>
-                <Link to="/">
-                    <img className="navbar-logo__image" src="/assets/images/logo-zuehlke.jpg" />
-                </Link>
-            </NavbarBrand>
-            <NavbarToggle />
-        </NavbarHeader>
-        <NavbarCollapse>
-            <Nav pullRight>
-                <NavItem href={'/#about'}>
-                    About
-                </NavItem>
-                <NavItem href={'/#participate'}>
-                    Participate
-                </NavItem>
-                {isAuthenticated &&
-                <LinkContainer to={'/profile'}>
-                    <NavItem>My Profile</NavItem>
-                </LinkContainer>
-                }
-                {isAuthenticated &&
-                <NavItem onClick={onLogoutClick}>Logout</NavItem>
-                }
-            </Nav>
-        </NavbarCollapse>
-    </Navbar>
+                     isAuthenticated,
+                     onLogoutClick,
+                     enteredSection,
+                     cleanSections
+                   }) => (
+  <Navbar>
+    <NavbarHeader className="navbar-logo">
+      <NavbarBrand>
+        <Link to="/">
+          <img className="navbar-logo__image" src="/assets/images/logo-zuehlke.jpg" />
+        </Link>
+      </NavbarBrand>
+      <NavbarToggle />
+    </NavbarHeader>
+    <NavbarCollapse>
+      <Nav pullRight>
+        <LinkContainer to={'/'}>
+          <NavItem>About</NavItem>
+        </LinkContainer>
+        {isAuthenticated &&
+        <LinkContainer to={'/profile'}>
+          <NavItem>My Profile</NavItem>
+        </LinkContainer>
+        }
+        {isAuthenticated &&
+        <NavItem onClick={onLogoutClick}>Logout</NavItem>
+        }
+      </Nav>
+    </NavbarCollapse>
+  </Navbar>
 );
 
 AppNavbar.propTypes = {
-    isAuthenticated: React.PropTypes.bool,
-    onLogoutClick: React.PropTypes.func,
-    enteredSection: React.PropTypes.func,
-    cleanSections: React.PropTypes.func,
+  isAuthenticated: React.PropTypes.bool,
+  onLogoutClick: React.PropTypes.func,
+  enteredSection: React.PropTypes.func,
+  cleanSections: React.PropTypes.func,
 };
 
 export default connect(
-    (state) => ({
-        isAuthenticated: state.user.isAuthenticated,
-    }),
-    {
-        onLogoutClick: logout,
-    }
+  (state) => ({
+    isAuthenticated: state.user.isAuthenticated,
+  }),
+  {
+    onLogoutClick: logout,
+  }
 )(AppNavbar);
