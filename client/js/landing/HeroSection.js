@@ -16,14 +16,14 @@ const HeroSection = ({ onAuthenticateGithubClick, onAuthenticateBitbucketClick }
                             <hr className="intro-divider" />
                             <div className="social-login-button-container">
                                 <Button
-                                    className="transparent social-login-button"
+                                    className="social-login-button"
                                     onClick={onAuthenticateGithubClick}
                                 >
                                     <GithubImage />
                                     Login with Github
                                 </Button>
                                 <Button
-                                    className="transparent social-login-button"
+                                    className="social-login-button"
                                     onClick={onAuthenticateBitbucketClick}
                                 >
                                     <BitbucketImage />
