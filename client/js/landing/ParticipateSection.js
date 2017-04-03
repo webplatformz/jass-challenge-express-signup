@@ -108,7 +108,7 @@ export default () => (
             <table className="table table-striped timetable">
               <tbody>
               <tr>
-                <td>Now - 08.05. @9am</td>
+                <td>Now - 08.05.<br />@9am</td>
                 <td>Implement your first bot version</td>
               </tr>
               <tr>
@@ -116,7 +116,7 @@ export default () => (
                 <td>Training #1 - See how your bot v0.1 performs against others</td>
               </tr>
               <tr>
-                <td>09.05. - 15.05. @9am</td>
+                <td>09.05. - 15.05.<br />@9am</td>
                 <td>Improve your bot to v0.9 so it will rock next training day</td>
               </tr>
               <tr>
@@ -124,11 +124,11 @@ export default () => (
                 <td>Training #2 - See how your bot v0.9 performs against others</td>
               </tr>
               <tr>
-                <td>16.05. - 21.05. @5pm</td>
+                <td>16.05. - 21.05.<br />@5pm</td>
                 <td>Improve your bot to crush your competitors</td>
               </tr>
               <tr>
-                <td>22.05. @18:00</td>
+                <td>22.05.<br />@18:00</td>
                 <td>
                   Final - Find out if you won the challenge during the awards ceremony, meet your competitors and the
                   creators of the Jass-Challenge and enjoy the evening with some food and drinks. A detailed agenda of
