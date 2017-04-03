@@ -3,6 +3,7 @@
   "githubSecret": "",
   "bitbucketKey": "",
   "bitbucketSecret": "",
+  "letsEncryptChallenge": "",
   "host": "localhost",
   "proxy": 3001,
   "port": 3000,
