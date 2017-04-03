@@ -3,6 +3,7 @@
   "githubSecret": "JASS_CHALLENGE_GITHUB_SECRET",
   "bitbucketKey": "JASS_CHALLENGE_BITBUCKET_KEY",
   "bitbucketSecret": "JASS_CHALLENGE_BITBUCKET_SECRET",
+  "letsEncryptChallenge": "JASS_CHALLENGE_LETS_ENCRYPT_CHALLENGE",
   "host": "HOST",
   "redisUrl": "REDIS_URL"
 }
