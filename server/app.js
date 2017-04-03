@@ -134,6 +134,14 @@ app.use(compression());
 app.use(express.static(__dirname + '/../build/client'));
 
 /**
+ * Handle Let's Encrypt request
+ */
+
+app.get('/.well-known/acme-challenge/5q5ucbzpGvhJBJeRlVlBzbVdJif087izN5tPbtBOQbY', (req, res) =>
+  res.send(config.get('LETS_ENCRYPT_CHALLENGE'))
+);
+
+/**
  * get user info of logged in user
  */
 app.get('/api/auth/user', (req, res) => {
