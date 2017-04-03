@@ -17,7 +17,8 @@ export default () => (
               We develop financially successful products, services and business models for today’s digital world -
               from coming up with the initial idea through to the implementation and operation. We believe that
               innovation requires an entrepreneurial mindset combined with the courage to push boundaries and break
-              new ground. Want to learn more about us? Read our Success Stories.
+              new ground. Want to learn more about us?
+              Read our <a href="https://www.zuehlke.com/ch/de/success-stories/" target="_blank">Success Stories</a>.
             </p>
             <h2 className="section-heading">Why a Jass-Challenge?</h2>
             <p className="lead">
@@ -51,7 +52,7 @@ export default () => (
             <p className="lead">
               The winning student or team gets a GoPro camera (each) and the unique chance to join one of our camps
               for two days. In the camp, you meet the creators of the Jass-Challenge and discover the field of
-              software engineering at Zühlke. The camp takes place on 14./15.6.2017.
+              software engineering at Zühlke. The camp takes place on 14-15 June 2017.
             </p>
             <h2 className="section-heading">How can I register?</h2>
             <p className="lead">
@@ -104,30 +105,30 @@ export default () => (
               After signing up, you can immediately start hacking. Here is the timetable for the trainings and the
               final:
             </p>
-            <table className="table table-striped">
+            <table className="table table-striped timetable">
               <tbody>
               <tr>
-                <td>Now - 08.05. @09:00</td>
+                <td>Now - 08.05. @9am</td>
                 <td>Implement your first bot version</td>
               </tr>
               <tr>
-                <td>09.05</td>
+                <td>09.05.</td>
                 <td>Training #1 - See how your bot v0.1 performs against others</td>
               </tr>
               <tr>
-                <td>09.05 - 15.05. @09:00</td>
+                <td>09.05. - 15.05. @9am</td>
                 <td>Improve your bot to v0.9 so it will rock next training day</td>
               </tr>
               <tr>
-                <td>16.05</td>
+                <td>16.05.</td>
                 <td>Training #2 - See how your bot v0.9 performs against others</td>
               </tr>
               <tr>
-                <td>16.05 - 21.05. @17:00</td>
+                <td>16.05. - 21.05. @5pm</td>
                 <td>Improve your bot to crush your competitors</td>
               </tr>
               <tr>
-                <td>22.05 @18:00</td>
+                <td>22.05. @18:00</td>
                 <td>
                   Final - Find out if you won the challenge during the awards ceremony, meet your competitors and the
                   creators of the Jass-Challenge and enjoy the evening with some food and drinks. A detailed agenda of
