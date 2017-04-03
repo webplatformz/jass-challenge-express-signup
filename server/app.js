@@ -131,6 +131,14 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(compression());
 
+app.get('*', (req, res, next) => {
+  if (process.env.NODE_ENV === 'production' && req.headers['x-forwarded-proto'] !== 'https') {
+    res.redirect('https://jass-challenge.zuehlke.io' + req.url)
+  } else {
+    next()
+  }
+});
+
 // client dir as static resources
 app.use(express.static(__dirname + '/../build/client'));
 
