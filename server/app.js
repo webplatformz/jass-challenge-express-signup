@@ -16,6 +16,7 @@ const GITHUB_KEY = config.get('githubKey');
 const GITHUB_SECRET = config.get('githubSecret');
 const BITBUCKET_KEY = config.get('bitbucketKey');
 const BITBUCKET_SECRET = config.get('bitbucketSecret');
+const LETS_ENCRYPT_CHALLENGE = config.get('letsEncryptChallenge');
 
 // configure redis store for persistent session storage
 const RedisStore = require('connect-redis')(expressSession);
@@ -138,7 +139,7 @@ app.use(express.static(__dirname + '/../build/client'));
  */
 
 app.get('/.well-known/acme-challenge/5q5ucbzpGvhJBJeRlVlBzbVdJif087izN5tPbtBOQbY', (req, res) =>
-  res.send(config.get('LETS_ENCRYPT_CHALLENGE'))
+  res.send(LETS_ENCRYPT_CHALLENGE)
 );
 
 /**
