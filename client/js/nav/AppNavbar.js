@@ -24,25 +24,23 @@ const AppNavbar = ({
           <img className="navbar-logo__image" src="/assets/images/logo-zuehlke.jpg" />
         </Link>
       </NavbarBrand>
+      {isAuthenticated &&
       <NavbarToggle />
+      }
     </NavbarHeader>
+    {isAuthenticated &&
     <NavbarCollapse>
       <Nav pullRight>
-        {isAuthenticated &&
         <LinkContainer to={'/'}>
           <NavItem>About</NavItem>
         </LinkContainer>
-        }
-        {isAuthenticated &&
         <LinkContainer to={'/profile'}>
           <NavItem>My Profile</NavItem>
         </LinkContainer>
-        }
-        {isAuthenticated &&
         <NavItem onClick={onLogoutClick}>Logout</NavItem>
-        }
       </Nav>
     </NavbarCollapse>
+    }
   </Navbar>
 );
 
