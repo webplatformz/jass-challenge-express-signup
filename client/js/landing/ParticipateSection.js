@@ -41,7 +41,7 @@ export default () => (
                   left: 0
                 }}
                 allowFullScreen
-              ></iframe>
+              />
             </div>
             <h2 className="section-heading">Who can participate?</h2>
             <p className="lead">
@@ -65,10 +65,7 @@ export default () => (
               <a href="https://github.com/webplatformz/challenge-client-java" target="_blank">
                 Java
               </a>
-              &nbsp;|&nbsp;
-              <a href="tbd" target="_blank">
-                C#
-              </a>
+              &nbsp;|&nbsp;C# (coming soon)
             </p>
             <p className="lead">
               Save your repo-URL in your profile and give our tournament account READ rights.<br />
