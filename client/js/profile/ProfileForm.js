@@ -71,13 +71,6 @@ const ProfileForm = ({
            disabled={!isEditing}
     />
     <h3>Person #1</h3>
-    <Field name="person1.gender"
-           component={renderSelect}
-           options={['Female', 'Male']}
-           label="Gender"
-           validate={[requiredSelect]}
-           disabled={!isEditing}
-    />
     <Field name="person1.fullname"
            type="text"
            component={renderField}
@@ -131,12 +124,6 @@ const ProfileForm = ({
            disabled={!isEditing}
     />
     <h3>Person #2</h3>
-    <Field name="person2.gender"
-           component={renderSelect}
-           options={['Female', 'Male']}
-           label="Gender"
-           disabled={!isEditing}
-    />
     <Field name="person2.fullname"
            type="text"
            component={renderField}
