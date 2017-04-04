@@ -98,14 +98,16 @@ export default () => (
               </a>
               .
             </p>
-
-
+            <h2 className="section-heading">What are the rules?</h2>
+            <p className="lead">
+              Check them out on the wiki of our <a href="https://github.com/webplatformz/challenge/wiki/Jass-Rules" target="_blank">Github repository</a>.
+            </p>
             <h2 className="section-heading">When does it start?</h2>
             <p className="lead">
               After signing up, you can immediately start hacking. Here is the timetable for the trainings and the
               final:
             </p>
-            <table className="table table-striped timetable">
+            <table className="table table-striped table-bordered timetable">
               <tbody>
               <tr>
                 <td>Now - 08.05.<br />@9am</td>
@@ -137,6 +139,10 @@ export default () => (
               </tr>
               </tbody>
             </table>
+            <h2 className="section-heading">Any Questions?</h2>
+            <p className="lead">
+              Get in touch with us: <a href="mailto:jass-challenge.zch@zuehlke.com">jass-challenge.zch@zuehlke.com</a>
+            </p>
           </Col>
         </Row>
       </div>
