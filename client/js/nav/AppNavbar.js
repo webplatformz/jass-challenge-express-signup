@@ -28,9 +28,11 @@ const AppNavbar = ({
     </NavbarHeader>
     <NavbarCollapse>
       <Nav pullRight>
+        {isAuthenticated &&
         <LinkContainer to={'/'}>
           <NavItem>About</NavItem>
         </LinkContainer>
+        }
         {isAuthenticated &&
         <LinkContainer to={'/profile'}>
           <NavItem>My Profile</NavItem>
