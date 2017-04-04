@@ -3,7 +3,6 @@ import { Field, reduxForm } from 'redux-form';
 import { Button, Form, FormGroup, FormControl, Col, ControlLabel, } from 'react-bootstrap';
 
 const required = value => value && value.length >= 3 ? undefined : 'Required, must be at least 3 characters.';
-const requiredSelect = value => value ? undefined : 'Required, choose one option.';
 const requiredNumber = value => value && value.length >= 1 ? undefined : 'Required, must be at least 1 digit.';
 
 const renderField = ({
@@ -25,31 +24,6 @@ const renderField = ({
     </Col>
     <Col sm={8}>
       <FormControl {...input} placeholder={placeholder} type={type} disabled={disabled} min={min} />
-      {touched && ((error && <span className="small">{error}</span>))}
-    </Col>
-  </FormGroup>
-);
-
-const renderSelect = ({
-                        input,
-                        label,
-                        disabled,
-                        options,
-                        meta: {
-                          touched,
-                          error,
-                          warning
-                        }
-                      }) => (
-  <FormGroup validationState={(touched && error) ? 'error' : null}>
-    <Col sm={2}>
-      <ControlLabel>{label}</ControlLabel>
-    </Col>
-    <Col sm={8}>
-      <FormControl {...input} componentClass="select" disabled={disabled}>
-        <option disabled value="">Please Select</option>
-        {options.map(option => <option key={option} value={option}>{option}</option>)}
-      </FormControl>
       {touched && ((error && <span className="small">{error}</span>))}
     </Col>
   </FormGroup>
