@@ -77,6 +77,21 @@ export default () => (
                 bitbucket - jass-challenge
               </a>
             </p>
+            <h2 className="section-heading">What programming languages are allowed?</h2>
+            <p className="lead">
+              Theoretically any programming language that can communicate over a Websocket can be used.<br />
+              But for this tournament we have to run your bots in a closed environment. For the sake of simplicity we will only allow:
+              <ul>
+                <li>JavaScript</li>
+                <li>Java</li>
+                <li>C#</li>
+              </ul>
+            </p>
+            <h2 className="section-heading">How will my bot run?</h2>
+            <p className="lead">
+              On the tournament days we will launch two instances of your bot that connect to the same tournament. These two instances will always play together against two instances of the bots of your opponents.
+              Please do not try to communicate with your other instance. We will run them in different docker containers and verify your code to make sure nobody cheats in the tournament.
+            </p>
             <h2 className="section-heading">How can I run it locally?</h2>
             <p className="lead">
               To run and test your bot locally, you need to have the&nbsp;
