@@ -127,7 +127,10 @@ export default () => (
               </tr>
               <tr>
                 <td>09.05.</td>
-                <td>Training #1 - See how your bot v0.1 performs against others</td>
+                <td>
+                  Training #1 - See how your bot v0.1 performs against others<br />
+                  There will be no event for this training. We will run the Tournament and then publish the results via email. You will get access to the logs of all games in this Tournament.
+                </td>
               </tr>
               <tr>
                 <td>09.05. - 15.05.<br />@9am</td>
@@ -135,7 +138,10 @@ export default () => (
               </tr>
               <tr>
                 <td>16.05.</td>
-                <td>Training #2 - See how your bot v0.9 performs against others</td>
+                <td>
+                  Training #2 - See how your bot v0.9 performs against others<br />
+                  There will be no event for this training. We will run the Tournament and then publish the results via email. You will get access to the logs of all games in this Tournament.
+                </td>
               </tr>
               <tr>
                 <td>16.05. - 21.05.<br />@5pm</td>
