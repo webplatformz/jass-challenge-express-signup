@@ -65,7 +65,10 @@ export default () => (
               <a href="https://github.com/webplatformz/challenge-client-java" target="_blank">
                 Java
               </a>
-              &nbsp;|&nbsp;C# (coming soon)
+              &nbsp;|&nbsp;
+              <a href="https://github.com/adiherzog/JassBotSkeleton-CSharp" target="_blank">
+                C#
+              </a>
             </p>
             <p className="lead">
               Save your repo-URL in your profile and give our tournament account READ rights.<br />
