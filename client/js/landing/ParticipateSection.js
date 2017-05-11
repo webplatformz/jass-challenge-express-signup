@@ -56,6 +56,9 @@ export default () => (
             </p>
             <h2 className="section-heading">How can I register?</h2>
             <p className="lead">
+              The first training has already taken place, but you still have the chance to submit your bot and let it compete against the other bots on the next training on Tuesday, 16.5.2017! The final round will be held on Monday, 22.5.2017 in Schlieren.<br /><br />
+              We are happy to announce that Monika Fasnacht is part of the final and will compete against a bot, live on stage! Who will win: Human or computer?<br />
+              Find out and register now!<br /><br />
               Sign in with either your Github or Bitbucket account. Create a
               repo for your bot or simply clone one of our skeleton bots:<br />
               <a href="https://github.com/webplatformz/challenge-client-js" target="_blank">
@@ -154,8 +157,7 @@ export default () => (
                 <td>22.05.<br />@18:00</td>
                 <td>
                   Final - Find out if you won the challenge during the awards ceremony, meet your competitors and the
-                  creators of the Jass-Challenge and enjoy the evening with some food and drinks. A detailed agenda of
-                  the event will follow soon.
+                  creators of the Jass-Challenge and enjoy the evening with some food and drinks. You can find the detailed agenda here: <a href="https://www.zuehlke.com/ch/de/jass-challenge/">https://www.zuehlke.com/ch/de/jass-challenge/</a>
                 </td>
               </tr>
               </tbody>
